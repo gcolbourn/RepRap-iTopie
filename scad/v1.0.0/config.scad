@@ -16,7 +16,7 @@ $fn = 50;
 // horizontal plate ----------------------------------------------- //
 // ---------------------------------------------------------------- //
 // sheet thickness (raw material)
-sheet_thickness                = 16;                    // raw sheet thickness
+sheet_thickness                = 18;                    // raw sheet thickness
 
 // ---------------------------------------------------------------- //
 // shortcuts ------------------------------------------------------ //
@@ -109,12 +109,32 @@ z_rod_holder_holes_spacing     = 20;                    // between the two holde
 // ---------------------------------------------------------------- //
 
 // logo
+include_logos                = 1;                       // include logo(s) [1 = yes; 0 = no]
 dxf_logo                     = "logo.dxf";              // path to DXF logo
+
+// LCD mount
+lcd_screen_width             = 73;                      // width of LCD screen
+lcd_screen_height            = 40;                      // height of LCD screen
+lcd_screen_vertical_offset   = 9;                       // vertical offset of LCD screen position (so dial can fit underneath)
+lcd_mount_holes_spacing_x    = 83;                      // horizontal spacing of LCD mount holes
+lcd_mount_holes_spacing_z    = 65;                      // vertical spacing of LCD mount holes
+lcd_mount_holes_offset_x     = 7.5;                     // horizontal offset of LCD mount holes from top right of screen
+lcd_mount_holes_offset_z     = 12.5;                    // vertical offset of LCD mount holes from top right of screen
+lcd_mount_holes_radius       = m3_screw_radius;         // LCD mount holes radius
+lcd_dial_hole_offset_x       = 0;                       // horizontal offset of LCD dial hole from top right of screen
+lcd_dial_hole_offset_z       = -lcd_screen_height - 24; // vertical offset of LCD dial hole from top right of screen
+lcd_dial_hole_radius         = 7.5;                     // LCD dial hole radius
+lcd_reset_hole_offset_x      = -33;                     // horizontal offset of LCD reset hole from bottom left of screen
+lcd_reset_hole_offset_z      = lcd_dial_hole_offset_z;  // vertical offset of LCD reset hole from bottom left of screen
+lcd_reset_hole_radius        = 2;                       // LCD reset hole radius
+lcd_contrast_hole_offset_x   = -lcd_screen_width;       // horizontal offset of LCD contrast hole from bottom left of screen
+lcd_contrast_hole_offset_z   = -lcd_screen_height - 20;  // vertical offset of LCD contrast hole from bottom left of screen
+lcd_contrast_hole_radius     = 4;                       // LCD contrast hole radius
 
 // vertical plate
 vertical_plate_width         = horizontal_plate_width;  // outer width
 vertical_plate_height        = horizontal_plate_height; // outer height
-vertical_plate_borders       = [60, 60, undef, 60];     // borders weight       [top, right, bottom, left]
+vertical_plate_borders       = [100, 60, undef, 60];     // borders weight       [top, right, bottom, left]
 vertical_plate_outer_corners = [10, 10, 10, 10];        // outer corners radius [topLeft, topRight, bottomRight, bottoLeft]
 vertical_plate_inner_corners = [10, 10, 10, 10];        // inner corners radius [topLeft, topRight, bottomRight, bottoLeft]
 
@@ -134,6 +154,11 @@ triangle_height              = undef;                   // rear triangle height 
 triangle_angle               = undef;                   // rear triangle angle         [undef = auto]
 triangle_margin              = [20, 20, undef, 20];     // rear triangle margin        [top, right, bottom, left]
 triangle_radius              = 10;                      // rear triangle corner radius [undef = auto]
+
+spooler_length               = 100;                     // length of arm for spool mount
+spooler_width                = 30;                      // width of arm for spool mount
+spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
+spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
 
 // ---------------------------------------------------------------- //
 // bed ------------------------------------------------------------ //
