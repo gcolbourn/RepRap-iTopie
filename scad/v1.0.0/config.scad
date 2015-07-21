@@ -109,8 +109,10 @@ z_rod_holder_holes_spacing     = 20;                    // between the two holde
 // ---------------------------------------------------------------- //
 
 // logo
-include_logos                = 1;                       // include logo(s) [1 = yes; 0 = no]
-dxf_logo                     = "logo.dxf";              // path to DXF logo
+include_logo_l               = 1;                       // include logo 1 [1 = yes; 0 = no]
+include_logo_r               = 1;                       // include logo 1 [1 = yes; 0 = no]
+dxf_logo_l                   = "SemiU_logo_engrave3.dxf";// path to DXF logo [left of LCD]
+dxf_logo_r                   = "logo.dxf";              // path to DXF logo [right of LCD]
 
 // LCD mount
 lcd_screen_width             = 73;                      // width of LCD screen
@@ -159,6 +161,10 @@ spooler_length               = 100;                     // length of arm for spo
 spooler_width                = 30;                      // width of arm for spool mount
 spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
 spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
+
+bowden_mount_holes_spacing   = 32;                     // spacing between bowden mount holes
+bowden_mount_holes_radius    = m4_screw_radius;        // raduis of bowden mount holes
+
 
 // ---------------------------------------------------------------- //
 // bed ------------------------------------------------------------ //

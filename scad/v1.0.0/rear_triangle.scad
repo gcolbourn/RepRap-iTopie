@@ -62,18 +62,26 @@ module _spool_holder(){
 
 // rear triangle
 module rear_triangle() {
-    render() difference() {
+    difference(){
+        union(){
+        render() difference() {
         _rear_triangle(_triangle_width, _triangle_height, _triangle_angle);
         translate([triangle_radius, _triangle_height / 2, 0])
-            square([_triangle_width, _triangle_height / 2]);
+            square([_triangle_width, _triangle_height / 2]); 
     }
     _rear_triangle_corner();
     rear_triangle_fingers();
+    translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
+_spool_holder();};
+// bowden mount holes
+            translate([_triangle_width / 2 + triangle_margin[3] / 2, _triangle_height / 2, 0])
+        rotate([0,0,atan( (_triangle_width - triangle_margin[3] ) / (_triangle_height + triangle_margin[3]) )]){
+            circle(bowden_mount_holes_radius);  
+            translate([0, bowden_mount_holes_spacing, 0])
+            circle(bowden_mount_holes_radius); 
+            }; 
+        };
 }
-
-rear_triangle();
-translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
-_spool_holder();
 
 
 module rear_triangles() {
@@ -85,4 +93,4 @@ module rear_triangles() {
                 rear_triangle();
     }
 }
-//rear_triangles();
+rear_triangles();
