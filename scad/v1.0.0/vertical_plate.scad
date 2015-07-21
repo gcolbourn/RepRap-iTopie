@@ -46,8 +46,31 @@ module vertical_base_plate() {
                 rear_triangle_pockets();
             translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
                 rear_triangle_pockets();
-            translate([vertical_plate_width / 2, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
-                logo();
+            if(include_logos == 1) {
+            translate([3 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+                scale([0.75,0.75,0])logo();};
+            //LCD holes
+            translate([vertical_plate_width / 2, lcd_screen_vertical_offset + vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+            {
+            offset(5)square([lcd_screen_width-10,lcd_screen_height-10],center=true);
+                for(i = [-1,1]){
+                    for(j = [-1,1]){
+            translate([i * (lcd_screen_width / 2 + lcd_mount_holes_offset_x),j * (lcd_screen_height / 2 + lcd_mount_holes_offset_z), 0])
+            circle(lcd_mount_holes_radius);
+                };
+            };
+            translate([lcd_screen_width / 2 + lcd_dial_hole_offset_x
+,lcd_screen_height / 2 + lcd_dial_hole_offset_z, 0])
+                        circle(lcd_dial_hole_radius);
+            translate([lcd_screen_width / 2 + lcd_reset_hole_offset_x
+,lcd_screen_height / 2 + lcd_reset_hole_offset_z, 0])
+                        circle(lcd_reset_hole_radius);
+            translate([lcd_screen_width / 2 + lcd_contrast_hole_offset_x
+,lcd_screen_height / 2 + lcd_contrast_hole_offset_z, 0])
+                        circle(lcd_contrast_hole_radius);
+            };
+            
+            //square([73,40],center=true);
             translate([vertical_plate_borders[3] / 2, 0, 0])
                 z_triangle_holes();
             translate([vertical_plate_width - (vertical_plate_borders[1] / 2), 0, 0])
@@ -84,3 +107,4 @@ module vertical_plate() {
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();
 }
+vertical_base_plate();
