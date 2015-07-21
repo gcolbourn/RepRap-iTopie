@@ -111,7 +111,7 @@ z_rod_holder_holes_spacing     = 20;                    // between the two holde
 // logo
 include_logo_l               = 1;                       // include logo 1 [1 = yes; 0 = no]
 include_logo_r               = 1;                       // include logo 1 [1 = yes; 0 = no]
-dxf_logo_l                   = "SemiU_logo_engrave3.dxf";// path to DXF logo [left of LCD]
+dxf_logo_l                   = "SemiU_logo_engrave9a.dxf";// path to DXF logo [left of LCD]
 dxf_logo_r                   = "logo.dxf";              // path to DXF logo [right of LCD]
 
 // LCD mount

@@ -46,10 +46,14 @@ module vertical_base_plate() {
                 rear_triangle_pockets();
             translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
                 rear_triangle_pockets();
-            if(include_logos == 1) {
+            // Logos
+            if(include_logo_l == 1) {
+            translate([1 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+                scale([0.12,0.12,0])logo_l();};
+            if(include_logo_r == 1) {
             translate([3 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
-                scale([0.75,0.75,0])logo();};
-            //LCD holes
+                scale([0.75,0.75,0])logo_r();};
+            // LCD holes
             translate([vertical_plate_width / 2, lcd_screen_vertical_offset + vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
             {
             offset(5)square([lcd_screen_width-10,lcd_screen_height-10],center=true);
@@ -90,9 +94,14 @@ module vertical_base_plate() {
         rounded_square(z_plate_pocket_size[0], total_feet_height, corner_radius = [0, 0, feet_corners[3], feet_corners[2]]);
 }
 
+// SemiU logo
+module logo_l() {
+    import(dxf_logo_l);
+}
+
 // iTopie logo
-module logo() {
-    import(dxf_logo);
+module logo_r() {
+    import(dxf_logo_r);
 }
 
 // rear triangle pockets
