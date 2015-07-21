@@ -45,6 +45,21 @@ module _rear_triangle_corner(){
     }
 }
 
+
+module _spool_holder(){
+    rotate([0,0,45])
+    difference() {
+        //offset(5)square([spooler_length-10,spooler_width-10]);
+        offset(5)square([spooler_length-5,spooler_width-5]);
+          //square([spooler_length,spooler_width]);
+        translate([spooler_length-spooler_width/2+sqrt(2)*spooler_notch_width/4,spooler_width/2-sqrt(2)*spooler_notch_width/4])
+           rotate([0,0,45])
+        square([spooler_notch_length,spooler_notch_width]);
+                translate([spooler_length-spooler_width/2,spooler_width/2])
+        circle(spooler_notch_width/2);
+    }
+}
+
 // rear triangle
 module rear_triangle() {
     render() difference() {
@@ -56,6 +71,11 @@ module rear_triangle() {
     rear_triangle_fingers();
 }
 
+rear_triangle();
+translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
+_spool_holder();
+
+
 module rear_triangles() {
     translate([0, total_feet_height - triangle_margin[0], 0]) {
         translate([vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0])
@@ -65,3 +85,4 @@ module rear_triangles() {
                 rear_triangle();
     }
 }
+//rear_triangles();
