@@ -162,8 +162,10 @@ spooler_width                = 30;                      // width of arm for spoo
 spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
 spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
 
-bowden_mount_holes_spacing   = 32;                     // spacing between bowden mount holes
-bowden_mount_holes_radius    = m4_screw_radius;        // raduis of bowden mount holes
+spooler_mount_holes_radius    = 8;                      // radius of spooler mount holes (M8; for spool to be placed at side of printer)
+
+bowden_mount_holes_spacing   = 32;                      // spacing between bowden mount holes
+bowden_mount_holes_radius    = m4_screw_radius;         // raduis of bowden mount holes
 
 
 // ---------------------------------------------------------------- //

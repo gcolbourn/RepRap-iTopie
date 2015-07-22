@@ -71,10 +71,15 @@ module rear_triangle() {
     }
     _rear_triangle_corner();
     rear_triangle_fingers();
-    translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
-_spool_holder();};
+    //spool holder
+//    translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
+//_spool_holder();
+    };
+//spooler mount hole
+            translate([3 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
+            circle(spooler_mount_holes_radius);  
 // bowden mount holes
-            translate([_triangle_width / 2 + triangle_margin[3] / 2, _triangle_height / 2, 0])
+            translate([_triangle_width / 4 + triangle_margin[3], 3 * _triangle_height / 4, 0])
         rotate([0,0,atan( (_triangle_width - triangle_margin[3] ) / (_triangle_height + triangle_margin[3]) )]){
             circle(bowden_mount_holes_radius);  
             translate([0, bowden_mount_holes_spacing, 0])

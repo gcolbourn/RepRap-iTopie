@@ -47,12 +47,14 @@ module vertical_base_plate() {
             translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
                 rear_triangle_pockets();
             // Logos
-            if(include_logo_l == 1) {
+            nlogos = 0;
+            if(include_logo_l == 1) {nlogos = 1;
             translate([1 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
                 scale([0.12,0.12,0])logo_l();};
-            if(include_logo_r == 1) {
+            if(include_logo_r == 1) {nlogos = 1;
             translate([3 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
                 scale([0.75,0.75,0])logo_r();};
+                echo("nlogos: ",nlogos);
             // LCD holes
             translate([vertical_plate_width / 2, lcd_screen_vertical_offset + vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
             {
