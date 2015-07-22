@@ -75,8 +75,10 @@ module rear_triangle() {
 //    translate([triangle_margin[3]+triangle_margin[3], _triangle_height-20, 0])
 //_spool_holder();
     };
-//spooler mount hole
+//spooler mount holes
             translate([3 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
+            circle(spooler_mount_holes_radius);  
+            translate([1 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
             circle(spooler_mount_holes_radius);  
 // bowden mount holes
             translate([_triangle_width / 4 + triangle_margin[3], 3 * _triangle_height / 4, 0])
