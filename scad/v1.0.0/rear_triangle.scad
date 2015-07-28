@@ -21,6 +21,9 @@ module rear_triangle_fingers() {
         square([feet_pocket_size[1], feet_pocket_size[0]]);
     translate([-feet_pocket_size[1], _triangle_height - feet_pocket_size[0], 0])
         square([feet_pocket_size[1], feet_pocket_size[0]]);
+    margin =  z_plate_pocket_size[1] + z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    translate([margin, - feet_pocket_size[1], 0])
+        square([feet_pocket_size[0], feet_pocket_size[1]]);
 }
 
 // rear triangle
@@ -96,7 +99,7 @@ module rear_triangle() {
 
 
 module rear_triangles() {
-    translate([0, total_feet_height - triangle_margin[0], 0]) {
+    translate([0, total_feet_height - triangle_margin[0] - feet_pocket_size[1], 0]) {
         translate([vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0]){
             difference(){
             rear_triangle();
