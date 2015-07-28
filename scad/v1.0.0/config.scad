@@ -171,20 +171,18 @@ bowden_mount_holes_radius    = m4_screw_radius;         // raduis of bowden moun
 // ---------------------------------------------------------------- //
 // mount holes for electronics ------------------------------------ //
 // ---------------------------------------------------------------- //
-mega_mount_holes_spacing_z1  = 82.5;                    // spacing between Mega 2560 mount holes (vertical 1)
-mega_mount_holes_spacing_z2  = 75;                      // spacing between Mega 2560 mount holes (vertical 2)
+mega_mount_holes_spacing_x1  = 75;                      // spacing between Mega 2560 mount holes (x1)
+mega_mount_holes_spacing_x2  = 82.5;                    // spacing between Mega 2560 mount holes (x2)
 mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
 mega_mount_holes_radius      = m3_screw_radius;         // raduis of Mega 2560 mount holes
-mega_margin                 = [30, 15];                  // spacing of holes from edge of RAMPS [x, y]
+mega_margin                 = [8, 13];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way)
 
 module _mega_holes(){
             circle(mega_mount_holes_radius);  
-            translate([0, mega_mount_holes_spacing_z1, 0])
-            circle(mega_mount_holes_radius);  
-            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1-mega_mount_holes_spacing_z2, 0])
-            circle(mega_mount_holes_radius);  
-            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1, 0])
-            circle(mega_mount_holes_radius);  
+            // This hole removed as too close to y endstop mount:
+            // translate([mega_mount_holes_spacing_x1, 0, 0]) circle(mega_mount_holes_radius);  
+            translate([0, mega_mount_holes_spacing_y, 0]) circle(mega_mount_holes_radius);
+            translate([mega_mount_holes_spacing_x2, mega_mount_holes_spacing_y, 0]) circle(mega_mount_holes_radius);  
 }
 
 psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU mount holes (x)
@@ -195,7 +193,7 @@ psu_margin                 = [30, 10];                   // spacing of holes fro
 rpi_mount_holes_spacing_x  = 57;                         // spacing between Raspberry Pi mount holes (x)
 rpi_mount_holes_spacing_y  = 48;                         // spacing between Raspberry Pi mount holes (y)
 rpi_mount_holes_radius     = m3_screw_radius;            // raduis of Raspberry Pi mount holes
-rpi_margin                 = [65, 5];                   // spacing of holes from edge of Raspberry Pi [x, y]
+rpi_margin                 = [65, 5];                    // spacing of holes from edge of Raspberry Pi [x, y]
 
 module _square_mount_holes(x, y, r){
             circle(r);  

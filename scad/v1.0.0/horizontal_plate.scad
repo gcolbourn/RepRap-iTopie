@@ -203,14 +203,14 @@ module y_endstop_mount() {
 
 // Mega 2560 mount
 module mega_mount_horizontal(){
-    translate([mega_mount_holes_spacing_z1+16,349.5, 0])
-    rotate([0,0,90])
+    //translate([mega_mount_holes_spacing_z1+16,349.5, 0])
+    translate([mega_margin[0], horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0] - mega_mount_holes_spacing_y - mega_margin[1], 0])
     _mega_holes();
 }
 
 // Raspberry Pi (RPi) mount
 module rpi_mount_horizontal(){
-    translate([300,349.5, 0])
+    translate([horizontal_plate_width - rpi_margin[0] - rpi_mount_holes_spacing_x,horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0] - rpi_mount_holes_spacing_y - rpi_margin[1], 0])
     _square_mount_holes(rpi_mount_holes_spacing_x , rpi_mount_holes_spacing_y, rpi_mount_holes_radius);
 }
 
