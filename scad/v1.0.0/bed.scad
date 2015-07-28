@@ -95,6 +95,11 @@ module y_lm8_holder_holes() {
         circle(bed_holes_radius);
 }
 
+// lm8uu holes
+module y_lm8_holes() {
+        square(y_lm8_hole, center=true);
+} 
+
 // bed holes
 module bed_holes() {
     // corners
@@ -124,14 +129,22 @@ module bed_holes() {
     // lm8uu holder
     translate([bed_width / 2, bed_height / 2, 0]) {
         spacing = _y_rod_pocket_spacing / 2;
-        translate([-spacing, _y_lm8_holder_vspacing, 0]) 
+        translate([-spacing, _y_lm8_holder_vspacing, 0]) {
             y_lm8_holder_holes();
-        translate([spacing, _y_lm8_holder_vspacing, 0]) 
+            y_lm8_holes();
+        }
+        translate([spacing, _y_lm8_holder_vspacing, 0]) {
             y_lm8_holder_holes();
-        translate([-spacing, -_y_lm8_holder_vspacing, 0]) 
+            y_lm8_holes();
+        }
+        translate([-spacing, -_y_lm8_holder_vspacing, 0]) {
             y_lm8_holder_holes();
-        translate([spacing, -_y_lm8_holder_vspacing, 0]) 
+            y_lm8_holes();
+        }
+        translate([spacing, -_y_lm8_holder_vspacing, 0]) {
             y_lm8_holder_holes();
+            y_lm8_holes();
+        }
     }
 
     // endstop flag (screw)
@@ -155,3 +168,4 @@ module bed() {
         bed_triangles();
     }
 }
+bed();

@@ -223,7 +223,9 @@ bed_triangle_offset          = 24;                      // bed triangle inner of
 y_belt_holder_screw_spacing = 16;                       // y belt holder holes spacing (axis to axis) 
 
 // y lm8uu holder
-y_lm8_holder_screw_spacing  = 24;                       // y lm8uu holder holes spacing (axis to axis) 
+y_lm8_holder_screw_spacing  = 20;                       // y lm8uu holder holes spacing (axis to axis) [24 is default iTopie; 20 is for lm8uus mounted directly to plate like Prusa i3)
+y_lm8_rounding_radius       = 2;                        // radius to round corners of LM8UU holes by
+y_lm8_hole                  = [10 - y_lm8_rounding_radius, 25 - y_lm8_rounding_radius];// y lm8uu bearing hole [width, length]
 y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical spacing (axis to axis)
 
 // ---------------------------------------------------------------- //
