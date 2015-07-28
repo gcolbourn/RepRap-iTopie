@@ -222,9 +222,15 @@ module psu_mount_horizontal(){
 
 // cable mount holes
 module cable_mount_horizontal(){
-    translate([10, horizontal_plate_height - z_plate_pocket_margin[0]+ 10, 0])
+    translate([10, horizontal_plate_height - z_plate_pocket_margin[0] + 10, 0])
     rotate([0, 0, 90])
     _cable_mount_holes();
+}
+
+// LCD cable through hole
+module LCD_cable_through_hole(){
+    translate([vertical_plate_borders[3] - 15, horizontal_plate_height - z_plate_pocket_margin[0] + 5, 0])
+    square([20,10]);
 }
 
 // horizontal plate
@@ -247,6 +253,7 @@ module horizontal_plate() {
         rpi_mount_horizontal();
         psu_mount_horizontal();
         cable_mount_horizontal();
+        LCD_cable_through_hole();
     }
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();
