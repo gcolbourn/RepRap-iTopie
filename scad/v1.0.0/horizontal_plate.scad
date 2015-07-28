@@ -208,6 +208,12 @@ module mega_mount_horizontal(){
     _mega_holes();
 }
 
+// PSU mount
+module psu_mount_horizontal(){
+    translate([psu_margin[0],feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1], 0])
+    _psu_holes();
+}
+
 // horizontal plate
 module horizontal_plate() {
 // base plate
@@ -225,6 +231,7 @@ module horizontal_plate() {
         feet_pockets();
         z_motor_mount();
         mega_mount_horizontal();
+        psu_mount_horizontal();
     }
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();

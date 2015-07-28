@@ -136,4 +136,4 @@ module vertical_plate() {
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();
 }
-vertical_base_plate();
+vertical_plate();
