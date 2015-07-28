@@ -35,28 +35,21 @@ module z_rod_holder_holes() {
         circle(z_rod_holder_holes_radius);
 }
 
-// vertical base plate
-module vertical_base_plate() {
-    translate([0, total_feet_height, 0]) {
-        render() difference() {
-            rounded_square(vertical_plate_width, vertical_plate_height - total_feet_height, corner_radius = [vertical_plate_outer_corners[0], vertical_plate_outer_corners[1], 0, 0]);
-            translate([vertical_plate_borders[3], 0, 0])
-                y_mount(vertical_plate_inner_width, vertical_plate_inner_height - total_feet_height, [vertical_plate_inner_corners[0], vertical_plate_inner_corners[1], 0, 0]);
-            translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0])
-                rear_triangle_pockets();
-            translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
-                rear_triangle_pockets();
-            // Logos
-            nlogos = 0;
-            if(include_logo_l == 1) {nlogos = 1;
-            translate([1 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
-                scale([0.12,0.12,0])logo_l();};
-            if(include_logo_r == 1) {nlogos = 1;
-            translate([3 * vertical_plate_width / 4, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
-                scale([0.75,0.75,0])logo_r();};
-                echo("nlogos: ",nlogos);
-            // LCD holes
-            translate([vertical_plate_width / 2, lcd_screen_vertical_offset + vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+// logos and LCD mount holes
+module _logo_1(){
+                translate([0, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+                scale([0.12,0.12,0])
+                import(dxf_logo_1);
+}
+
+module _logo_2(){
+            translate([0, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+                scale([0.75,0.75,0])
+                import(dxf_logo_2);
+}
+
+module _lcd(){
+            translate([0, lcd_screen_vertical_offset + vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
             {
             offset(5)square([lcd_screen_width-10,lcd_screen_height-10],center=true);
                 for(i = [-1,1]){
@@ -75,6 +68,41 @@ module vertical_base_plate() {
 ,lcd_screen_height / 2 + lcd_contrast_hole_offset_z, 0])
                         circle(lcd_contrast_hole_radius);
             };
+        }
+
+// vertical base plate
+module vertical_base_plate() {
+    translate([0, total_feet_height, 0]) {
+        render() difference() {
+            rounded_square(vertical_plate_width, vertical_plate_height - total_feet_height, corner_radius = [vertical_plate_outer_corners[0], vertical_plate_outer_corners[1], 0, 0]);
+            translate([vertical_plate_borders[3], 0, 0])
+                y_mount(vertical_plate_inner_width, vertical_plate_inner_height - total_feet_height, [vertical_plate_inner_corners[0], vertical_plate_inner_corners[1], 0, 0]);
+            translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0])
+                rear_triangle_pockets();
+            translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
+                rear_triangle_pockets();
+            // Logos
+            if (nlogos == 1) {
+            translate([1 * vertical_plate_width / 3,0,0]) 
+                _logo_1();
+            translate([2 * vertical_plate_width / 3,0,0]) 
+                _lcd();                
+            };
+            if (nlogos == 2) {
+            translate([1 * vertical_plate_width / 3,0,0]) 
+                _logo_2();
+            translate([2 * vertical_plate_width / 3,0,0]) 
+                _lcd();    
+            };
+            if (nlogos == 3) {
+            translate([1 * vertical_plate_width / 4,0,0]) 
+                _logo_1();
+            translate([1 * vertical_plate_width / 2,0,0]) 
+                _lcd();    
+            translate([3 * vertical_plate_width / 4,0,0]) 
+                _logo_2();
+            };
+ 
             
             //square([73,40],center=true);
             translate([vertical_plate_borders[3] / 2, 0, 0])
@@ -94,16 +122,6 @@ module vertical_base_plate() {
     rounded_square(z_plate_pocket_size[0], total_feet_height, corner_radius = [0, 0, feet_corners[1], feet_corners[0]]);
     translate([vertical_plate_width - z_plate_pocket_size[0], 0, 0])
         rounded_square(z_plate_pocket_size[0], total_feet_height, corner_radius = [0, 0, feet_corners[3], feet_corners[2]]);
-}
-
-// SemiU logo
-module logo_l() {
-    import(dxf_logo_l);
-}
-
-// iTopie logo
-module logo_r() {
-    import(dxf_logo_r);
 }
 
 // rear triangle pockets

@@ -109,10 +109,11 @@ z_rod_holder_holes_spacing     = 20;                    // between the two holde
 // ---------------------------------------------------------------- //
 
 // logo
-include_logo_l               = 1;                       // include logo 1 [1 = yes; 0 = no]
-include_logo_r               = 1;                       // include logo 1 [1 = yes; 0 = no]
-dxf_logo_l                   = "SemiU_logo_engrave9a.dxf";// path to DXF logo [left of LCD]
-dxf_logo_r                   = "logo.dxf";              // path to DXF logo [right of LCD]
+include_logo_1               = 1;                       // include logo 1 [1 = yes; 0 = no]
+include_logo_2               = 2;                       // include logo 2 [2 = yes; 0 = no]
+nlogos = include_logo_1 + include_logo_2;
+dxf_logo_1                   = "SemiU_logo_engrave9a.dxf";// path to DXF logo 1 [left of LCD if both logos present]
+dxf_logo_2                   = "logo.dxf";              // path to DXF logo 2 [right of LCD if both logos present]
 
 // LCD mount
 lcd_screen_width             = 73;                      // width of LCD screen
