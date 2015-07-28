@@ -166,7 +166,7 @@ spooler_notch_width          = 8;                       // width of notch for ro
 spooler_mount_holes_radius   = 8;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer)
 
 bowden_mount_holes_spacing   = 32;                      // spacing between bowden mount holes
-bowden_mount_holes_radius    = m4_screw_radius;         // raduis of bowden mount holes
+bowden_mount_holes_radius    = m4_screw_radius;         // radius of bowden mount holes
 
 // ---------------------------------------------------------------- //
 // mount holes for electronics ------------------------------------ //
@@ -174,7 +174,7 @@ bowden_mount_holes_radius    = m4_screw_radius;         // raduis of bowden moun
 mega_mount_holes_spacing_x1  = 75;                      // spacing between Mega 2560 mount holes (x1)
 mega_mount_holes_spacing_x2  = 82.5;                    // spacing between Mega 2560 mount holes (x2)
 mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
-mega_mount_holes_radius      = m3_screw_radius;         // raduis of Mega 2560 mount holes
+mega_mount_holes_radius      = m3_screw_radius;         // radius of Mega 2560 mount holes
 mega_margin                 = [8, 13];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way)
 
 module _mega_holes(){
@@ -187,12 +187,12 @@ module _mega_holes(){
 
 psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU mount holes (x)
 psu_mount_holes_spacing_y  = 95;                         // spacing between PSU mount holes (y)
-psu_mount_holes_radius     = m3_screw_radius;            // raduis of PSU mount holes
+psu_mount_holes_radius     = m3_screw_radius;            // radies of PSU mount holes
 psu_margin                 = [30, 10];                   // spacing of holes from edge of PSU [x, y]
 
 rpi_mount_holes_spacing_x  = 57;                         // spacing between Raspberry Pi mount holes (x)
 rpi_mount_holes_spacing_y  = 48;                         // spacing between Raspberry Pi mount holes (y)
-rpi_mount_holes_radius     = m3_screw_radius;            // raduis of Raspberry Pi mount holes
+rpi_mount_holes_radius     = m3_screw_radius;            // radies of Raspberry Pi mount holes
 rpi_margin                 = [65, 5];                    // spacing of holes from edge of Raspberry Pi [x, y]
 
 module _square_mount_holes(x, y, r){
@@ -200,6 +200,14 @@ module _square_mount_holes(x, y, r){
             translate([x , 0, 0]) circle(r);  
             translate([0, y, 0]) circle(r);  
             translate([x , y, 0]) circle(r);  
+}
+
+cable_mount_holes_spacing   = 10;                        // spacing between cable mount holes (for tidying cables)
+cable_mount_holes_radius    = m3_screw_radius;           // radius of Mega 2560 mount holes
+
+module _cable_mount_holes(){
+            circle(cable_mount_holes_radius);  
+            translate([cable_mount_holes_spacing , 0, 0]) circle(cable_mount_holes_radius);  
 }
 
 // ---------------------------------------------------------------- //

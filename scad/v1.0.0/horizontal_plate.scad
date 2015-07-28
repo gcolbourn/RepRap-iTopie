@@ -220,6 +220,13 @@ module psu_mount_horizontal(){
     _square_mount_holes(psu_mount_holes_spacing_x , psu_mount_holes_spacing_y, psu_mount_holes_radius);
 }
 
+// cable mount holes
+module cable_mount_horizontal(){
+    translate([10, horizontal_plate_height - z_plate_pocket_margin[0]+ 10, 0])
+    rotate([0, 0, 90])
+    _cable_mount_holes();
+}
+
 // horizontal plate
 module horizontal_plate() {
 // base plate
@@ -239,6 +246,7 @@ module horizontal_plate() {
         mega_mount_horizontal();
         rpi_mount_horizontal();
         psu_mount_horizontal();
+        cable_mount_horizontal();
     }
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();
