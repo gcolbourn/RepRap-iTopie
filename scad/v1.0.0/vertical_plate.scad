@@ -70,6 +70,15 @@ module _lcd(){
             };
         }
 
+// cable mount holes
+module cable_mount_vertical(){
+    translate([vertical_plate_borders[3] - 14, vertical_plate_height - vertical_plate_borders[0] - total_feet_height + 15, 0])
+    rotate([0, 0, -45])
+    _cable_mount_holes();
+    translate([vertical_plate_borders[3] - 15, 10, 0])
+    _cable_mount_holes();
+}
+
 // vertical base plate
 module vertical_base_plate() {
     translate([0, total_feet_height, 0]) {
@@ -103,8 +112,8 @@ module vertical_base_plate() {
                 _logo_2();
             };
  
+            cable_mount_vertical();
             
-            //square([73,40],center=true);
             translate([vertical_plate_borders[3] / 2, 0, 0])
                 z_triangle_holes();
             translate([vertical_plate_width - (vertical_plate_borders[1] / 2), 0, 0])
