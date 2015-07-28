@@ -97,6 +97,7 @@ module y_lm8_holder_holes() {
 
 // lm8uu holes
 module y_lm8_holes() {
+        offset(y_lm8_rounding_radius) 
         square(y_lm8_hole, center=true);
 } 
 
