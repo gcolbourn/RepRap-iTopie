@@ -203,7 +203,8 @@ module y_endstop_mount() {
 
 // Mega 2560 mount
 module mega_mount_horizontal(){
-    translate([1 * _triangle_width / 4 - 18, _triangle_height / 3-3, 0])
+    translate([mega_mount_holes_spacing_z1+16,349.5, 0])
+    rotate([0,0,90])
     _mega_holes();
 }
 
