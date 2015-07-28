@@ -28,13 +28,26 @@ module bed_triangles() {
             rotate([0, 0, 180])
             _triangle(bed_base_width, bed_base_height);
     }
-    translate([bed_margin[0] + bed_base_width, bed_margin[1], 0])
-        rotate([0, 0, 90])
-            _triangle(bed_base_height, bed_base_width);
-    translate([bed_margin[0], bed_height - bed_margin[1], 0])
-        rotate([0, 0, 270])
-            _triangle(bed_base_height, bed_base_width);
+//    translate([bed_margin[0] + bed_base_width, bed_margin[1], 0])
+//        rotate([0, 0, 90])
+//            _triangle(bed_base_height, bed_base_width);
+//    translate([bed_margin[0], bed_height - bed_margin[1], 0])
+//        rotate([0, 0, 270])
+//            _triangle(bed_base_height, bed_base_width);
     
+}
+
+// bed squares
+module bed_squares() {
+    translate([bed_margin[0] + bed_base_width / 4, bed_margin[1] + bed_base_height / 2, 0]) 
+        offset(8)square([40, 20],center=true);
+    translate([bed_margin[0] + 3 * bed_base_width / 4, bed_margin[1] + bed_base_height / 2, 0])
+        offset(8)square([40, 20],center=true);
+//    translate([bed_margin[0] + bed_base_width / 2, bed_margin[1] + bed_base_height / 4 - 10, 0])
+//        offset(8)square([40, 34],center=true);   
+//    translate([bed_margin[0] + bed_base_width / 2, bed_margin[1] + 3 * bed_base_height / 4 + 10, 0])     
+//        offset(8)square([40, 34],center=true);
+
 }
 
 // bed cross
@@ -167,6 +180,7 @@ module bed() {
         bed_base();
         bed_holes();
         bed_triangles();
+        bed_squares();
     }
 }
 bed();

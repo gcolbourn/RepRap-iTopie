@@ -217,7 +217,7 @@ bed_holes_spacing            = [209, 209];              // bed screws holes spac
 bed_corner_radius            = 5.5;                     // bed corners radius
 bed_margin                   = [11, 11];                // bed outer margin [x, y]
 bed_holes_radius             = m3_screw_radius;         // bed screw radius
-bed_triangle_offset          = 27;                      // bed triangle inner offset (24 without LM8UU holes)
+bed_triangle_offset          = 20;                      // bed triangle inner offset (24 without LM8UU holes)
 
 // y belt holder
 y_belt_holder_screw_spacing = 16;                       // y belt holder holes spacing (axis to axis) 
@@ -280,4 +280,4 @@ bed_base_width  = bed_width  - (bed_margin[0] * 2);
 bed_base_height = bed_height - (bed_margin[1] * 2);
 
 //_y_lm8_holder_vspacing = y_lm8_holder_vspacing ? y_lm8_holder_vspacing : bed_height / 4;
-_y_lm8_holder_vspacing = y_lm8_holder_vspacing ? y_lm8_holder_vspacing : bed_height / 4 + 5;
+_y_lm8_holder_vspacing = y_lm8_holder_vspacing ? y_lm8_holder_vspacing : bed_height / 4 - 10;
