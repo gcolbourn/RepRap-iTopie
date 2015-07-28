@@ -208,10 +208,16 @@ module mega_mount_horizontal(){
     _mega_holes();
 }
 
+// Raspberry Pi (RPi) mount
+module rpi_mount_horizontal(){
+    translate([300,349.5, 0])
+    _square_mount_holes(rpi_mount_holes_spacing_x , rpi_mount_holes_spacing_y, rpi_mount_holes_radius);
+}
+
 // PSU mount
 module psu_mount_horizontal(){
     translate([psu_margin[0],feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1], 0])
-    _psu_holes();
+    _square_mount_holes(psu_mount_holes_spacing_x , psu_mount_holes_spacing_y, psu_mount_holes_radius);
 }
 
 // horizontal plate
@@ -231,6 +237,7 @@ module horizontal_plate() {
         feet_pockets();
         z_motor_mount();
         mega_mount_horizontal();
+        rpi_mount_horizontal();
         psu_mount_horizontal();
     }
     translate([0, -feet_height - sheet_thickness - 20, 0])

@@ -175,6 +175,7 @@ mega_mount_holes_spacing_z1  = 82.5;                    // spacing between Mega 
 mega_mount_holes_spacing_z2  = 75;                      // spacing between Mega 2560 mount holes (vertical 2)
 mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
 mega_mount_holes_radius      = m3_screw_radius;         // raduis of Mega 2560 mount holes
+mega_margin                 = [30, 15];                  // spacing of holes from edge of RAMPS [x, y]
 
 module _mega_holes(){
             circle(mega_mount_holes_radius);  
@@ -191,15 +192,16 @@ psu_mount_holes_spacing_y  = 95;                         // spacing between PSU 
 psu_mount_holes_radius     = m3_screw_radius;            // raduis of PSU mount holes
 psu_margin                 = [30, 10];                   // spacing of holes from edge of PSU [x, y]
 
+rpi_mount_holes_spacing_x  = 57;                         // spacing between Raspberry Pi mount holes (x)
+rpi_mount_holes_spacing_y  = 48;                         // spacing between Raspberry Pi mount holes (y)
+rpi_mount_holes_radius     = m3_screw_radius;            // raduis of Raspberry Pi mount holes
+rpi_margin                 = [65, 5];                   // spacing of holes from edge of Raspberry Pi [x, y]
 
-module _psu_holes(){
-            circle(psu_mount_holes_radius);  
-            translate([psu_mount_holes_spacing_x , 0, 0])
-            circle(psu_mount_holes_radius);  
-            translate([0, psu_mount_holes_spacing_y, 0])
-            circle(psu_mount_holes_radius);  
-            translate([psu_mount_holes_spacing_x , psu_mount_holes_spacing_y, 0])
-            circle(psu_mount_holes_radius);  
+module _square_mount_holes(x, y, r){
+            circle(r);  
+            translate([x , 0, 0]) circle(r);  
+            translate([0, y, 0]) circle(r);  
+            translate([x , y, 0]) circle(r);  
 }
 
 // ---------------------------------------------------------------- //
