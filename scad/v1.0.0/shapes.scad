@@ -49,3 +49,13 @@ module y_mount(width, height, corner_radius) {
             corner(corner_radius[3]);
     }
 }
+
+module _mega_holes(){
+                circle(mega_mount_holes_radius);  
+            translate([0, mega_mount_holes_spacing_z1, 0])
+            circle(mega_mount_holes_radius);  
+            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1-mega_mount_holes_spacing_z2, 0])
+            circle(mega_mount_holes_radius);  
+            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1, 0])
+            circle(mega_mount_holes_radius);  
+}

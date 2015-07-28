@@ -201,6 +201,12 @@ module y_endstop_mount() {
     }
 }
 
+// Mega 2560 mount
+module mega_mount_horizontal(){
+    translate([1 * _triangle_width / 4 - 18, _triangle_height / 3-3, 0])
+    _mega_holes();
+}
+
 // horizontal plate
 module horizontal_plate() {
 // base plate
@@ -217,9 +223,12 @@ module horizontal_plate() {
         y_rod_pockets();
         feet_pockets();
         z_motor_mount();
+        mega_mount_horizontal();
     }
     translate([0, -feet_height - sheet_thickness - 20, 0])
         feet();
     translate([(horizontal_plate_width - bed_width) / 2, (horizontal_plate_height - bed_height) / 2, 0])
         bed();
 }
+
+horizontal_plate();

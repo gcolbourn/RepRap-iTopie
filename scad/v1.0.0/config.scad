@@ -162,11 +162,25 @@ spooler_width                = 30;                      // width of arm for spoo
 spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
 spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
 
-spooler_mount_holes_radius    = 8;                      // radius of spooler mount holes (M8; for spool to be placed at side of printer)
+spooler_mount_holes_radius   = 8;                      // radius of spooler mount holes (M8; for spool to be placed at side of printer)
 
 bowden_mount_holes_spacing   = 32;                      // spacing between bowden mount holes
 bowden_mount_holes_radius    = m4_screw_radius;         // raduis of bowden mount holes
 
+mega_mount_holes_spacing_z1  = 82.5;                   // spacing between Mega 2560 mount holes (vertical 1)
+mega_mount_holes_spacing_z2  = 75;                     // spacing between Mega 2560 mount holes (vertical 2)
+mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
+mega_mount_holes_radius      = m3_screw_radius;         // raduis of Mega 2560 mount holes
+
+module _mega_holes(){
+            circle(mega_mount_holes_radius);  
+            translate([0, mega_mount_holes_spacing_z1, 0])
+            circle(mega_mount_holes_radius);  
+            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1-mega_mount_holes_spacing_z2, 0])
+            circle(mega_mount_holes_radius);  
+            translate([mega_mount_holes_spacing_y, mega_mount_holes_spacing_z1, 0])
+            circle(mega_mount_holes_radius);  
+}
 
 // ---------------------------------------------------------------- //
 // bed ------------------------------------------------------------ //

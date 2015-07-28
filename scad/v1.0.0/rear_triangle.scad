@@ -80,6 +80,10 @@ module rear_triangle() {
             circle(spooler_mount_holes_radius);  
             translate([1 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
             circle(spooler_mount_holes_radius);  
+// Mega 2560 mount holes    
+//            translate([1 * _triangle_width / 4 - 18, _triangle_height / 3-3, 0])
+//            _mega_holes();
+    
 // bowden mount holes
             translate([_triangle_width / 4 + triangle_margin[3], 3 * _triangle_height / 4, 0])
         rotate([0,0,atan( (_triangle_width - triangle_margin[3] ) / (_triangle_height + triangle_margin[3]) )]){
@@ -93,8 +97,13 @@ module rear_triangle() {
 
 module rear_triangles() {
     translate([0, total_feet_height - triangle_margin[0], 0]) {
-        translate([vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0])
+        translate([vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0]){
+            difference(){
             rear_triangle();
+                    translate([1 * _triangle_width / 4 - 18, _triangle_height / 3-3, 0])
+            _mega_holes();
+            }
+            };
         translate([vertical_plate_inner_width + vertical_plate_borders[3] - feet_pocket_size[1] - triangle_margin[3], _triangle_height, 0])
             rotate([0, 0,180])
                 rear_triangle();
