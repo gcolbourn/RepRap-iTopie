@@ -12,6 +12,9 @@
 // @upddate 2015-07-03 <skarab> add: feet and triangle
 $fn = 50;
 
+bolt_fastening                 = 1;                       // fasten with bolts [1 = yes (aluminum of acrylic version); 0 = no (classic wooden screwed together version)]
+
+
 // ---------------------------------------------------------------- //
 // horizontal plate ----------------------------------------------- //
 // ---------------------------------------------------------------- //
@@ -64,7 +67,8 @@ y_endstop_holes_radius         = m3_screw_radius;       // endstop screws holes 
 y_endstop_holes_spacing        = 9.5;                   // between the two endstop screws (axis to axis)
 
 // y rod pockets
-y_rod_pocket_size              = [8, 20];               // pockets size   [width, height]
+y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 20];               // pockets size   [width, height]
+echo("y_rod_pocket_size",y_rod_pocket_size);
 y_rod_pocket_spacing           = undef;                 // pockets spacing (axis to axis) [undef = auto]
 
 // y rod holes
@@ -231,7 +235,6 @@ y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical
 // ---------------------------------------------------------------- //
 // bolt fastening option ------------------------------------------ //
 // ---------------------------------------------------------------- //
-bolt_fastening              = 1;                       // fasten with bolts [1 = yes (aluminum of acrylic version); 0 = no (classic wooden screwed together version)]
 bolt_mount_spacing          = 40;
 bolt_hole_depth             = 31 - sheet_thickness;
 //bolt_hole_depth             = 25;
@@ -255,6 +258,10 @@ module bolt_pegs() {
    translate([bolt_mount_spacing, 0, 0])
         square(feet_pocket_size);
 }
+
+//if (bolt_fastening==0) y_rod_pocket_size=[8, 20];               // pockets size   [width, height]
+//if (bolt_fastening==1) y_rod_pocket_size=[5.5, 20];               // pockets size   [width, height]. 5.5 so M8 rods can rest on top 
+    
 // ---------------------------------------------------------------- //
 // --- CHANGE NOTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING --- //
 // ---------------------------------------------------------------- //
@@ -271,6 +278,12 @@ _y_rod_pocket_spacing = y_rod_pocket_spacing ? y_rod_pocket_spacing : (horizonta
 
 // y rod pockets auto spacing
 _z_motor_mount_spacing = z_motor_mount_spacing ? z_motor_mount_spacing : horizontal_plate_width - 60;
+
+// y rod pockets auto spacing
+_z_motor_mount_spacing = z_motor_mount_spacing ? z_motor_mount_spacing : horizontal_plate_width - 60;
+
+// y rod pocket auto width
+//y_rod_pocket_size = (bolt_fastening == 1)? [5.5, 20] : [8, 20]; // 5.5 so M8 rods can rest on top if using bolt fastening
 
 // y idler pocket auto width
 _y_idler_pocket_width = y_idler_pocket_width ? y_idler_pocket_width : y_idler_mount_width - 20;
