@@ -16,7 +16,7 @@ $fn = 50;
 // horizontal plate ----------------------------------------------- //
 // ---------------------------------------------------------------- //
 // sheet thickness (raw material)
-sheet_thickness                = 18;                    // raw sheet thickness
+sheet_thickness                = 6;                    // raw sheet thickness
 
 // ---------------------------------------------------------------- //
 // shortcuts ------------------------------------------------------ //
@@ -228,6 +228,33 @@ y_lm8_rounding_radius       = 2;                        // radius to round corne
 y_lm8_hole                  = [10 - y_lm8_rounding_radius, 25 - y_lm8_rounding_radius];// y lm8uu bearing hole [width, length]
 y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical spacing (axis to axis)
 
+// ---------------------------------------------------------------- //
+// bolt fastening option ------------------------------------------ //
+// ---------------------------------------------------------------- //
+bolt_fastening              = 1;                       // fasten with bolts [1 = yes (aluminum of acrylic version); 0 = no (classic wooden screwed together version)]
+bolt_mount_spacing          = 40;
+bolt_hole_depth             = 31 - sheet_thickness;
+//bolt_hole_depth             = 25;
+bolt_hole_width             = 2 * m4_screw_radius + 0.5;
+bolt_nut_hole_width         = 8;
+bolt_nut_hole_depth         = 4;
+bolt_nut_hole_position      = 28 - sheet_thickness;
+//bolt_nut_hole_position      = 21;
+
+module bolt_hole() {
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_hole_width)/2, - bolt_hole_depth, 0])
+    square([bolt_hole_width, bolt_hole_depth]);
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_nut_hole_width)/2, - bolt_nut_hole_position, 0])
+    square([bolt_nut_hole_width, bolt_nut_hole_depth]);
+
+}
+
+module bolt_pegs() {
+   translate([0,0,0])
+        square(feet_pocket_size);
+   translate([bolt_mount_spacing, 0, 0])
+        square(feet_pocket_size);
+}
 // ---------------------------------------------------------------- //
 // --- CHANGE NOTHING BELOW, UNLESS YOU KNOW WHAT YOU ARE DOING --- //
 // ---------------------------------------------------------------- //

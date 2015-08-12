@@ -15,38 +15,6 @@ use     <shapes.scad>
 use     <feet.scad>
 use     <bed.scad>
 
-
-// z triangle screws holes
-module z_triangle_holes() {
-    center = z_triangle_pocket_size[0] / 2;
-    translate([center, -z_triangle_holes_margin, 0])
-        circle(z_triangle_holes_radius);
-    translate([center, z_triangle_pocket_size[1] + z_triangle_holes_margin, 0])
-        circle(z_triangle_holes_radius);
-}
-
-// z triangle pockets
-module z_triangle_pockets() {
-    margin_top = horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
-    translate([z_triangle_pocket_margin[3], margin_top, 0]) {
-        square(z_triangle_pocket_size);
-        z_triangle_holes();
-    }
-    translate([horizontal_plate_width - z_triangle_pocket_size[0] - z_triangle_pocket_margin[1], margin_top, 0]) {
-        square(z_triangle_pocket_size);
-        z_triangle_holes();
-    }
-}
-
-// z plate pockets
-module z_plate_pockets() {
-    margin_top = horizontal_plate_height - z_plate_pocket_size[1] - z_plate_pocket_margin[0];
-    translate([z_plate_pocket_margin[3], margin_top, 0])
-        square(z_plate_pocket_size);
-    translate([horizontal_plate_width - z_plate_pocket_size[0] - z_plate_pocket_margin[3], margin_top, 0])
-        square(z_plate_pocket_size);
-}
-
 // y rod holes
 module y_rod_holes() {
     center = y_rod_pocket_size[1] / 2;
@@ -77,6 +45,66 @@ module y_rod_pockets() {
         _y_rod_pockets();
 }
 
+// z plate pockets
+module z_plate_pockets() {
+    margin_top = horizontal_plate_height - z_plate_pocket_size[1] - z_plate_pocket_margin[0];
+    translate([z_plate_pocket_margin[3], margin_top, 0])
+        square(z_plate_pocket_size);
+    translate([horizontal_plate_width - z_plate_pocket_size[0] - z_plate_pocket_margin[3], margin_top, 0])
+        square(z_plate_pocket_size);
+}
+
+// z triangle screws holes
+module z_triangle_holes() {
+    center = z_triangle_pocket_size[0] / 2;
+    translate([center, -z_triangle_holes_margin, 0])
+        circle(z_triangle_holes_radius);
+    translate([center, z_triangle_pocket_size[1] + z_triangle_holes_margin, 0])
+        circle(z_triangle_holes_radius);
+}
+
+// z triangle pockets
+module z_triangle_pockets() {
+    margin_top = horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    translate([z_triangle_pocket_margin[3], margin_top, 0]) {
+        square(z_triangle_pocket_size);
+        z_triangle_holes();
+    }
+    translate([horizontal_plate_width - z_triangle_pocket_size[0] - z_triangle_pocket_margin[1], margin_top, 0]) {
+        square(z_triangle_pocket_size);
+        z_triangle_holes();
+    }
+}
+
+// z triangle bolt holes
+module z_triangle_holes_bolts() {
+    center = z_triangle_pocket_size[0] / 2;
+    translate([center, (bolt_mount_spacing - feet_pocket_size[0])/2 , 0])
+        circle(z_triangle_holes_radius);
+}
+
+module bolt_hole() {
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_hole_width)/2, - bolt_hole_depth, 0])
+    square([bolt_hole_width, bolt_hole_depth]);
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_nut_hole_width)/2, - bolt_nut_hole_position, 0])
+    square([bolt_nut_hole_width, bolt_nut_hole_depth]);
+
+}
+
+// z triangle pockets (bolts)
+module z_triangle_pockets_bolts() {
+    margin_top = horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    translate([z_triangle_pocket_margin[3], margin_top, 0]) {
+        {translate([0,- bolt_mount_spacing / 2,0]) square(z_triangle_pocket_size);};
+        {translate([0, bolt_mount_spacing - bolt_mount_spacing/2, 0]) square(z_triangle_pocket_size);};
+        z_triangle_holes_bolts();
+    }
+    translate([horizontal_plate_width - z_triangle_pocket_size[0] - z_triangle_pocket_margin[1], margin_top, 0]) { 
+        {translate([0,- bolt_mount_spacing / 2,0]) square(z_triangle_pocket_size);};
+        {translate([0, bolt_mount_spacing - bolt_mount_spacing/2, 0]) square(z_triangle_pocket_size);};
+        z_triangle_holes_bolts();
+    }
+}
 // feet screws holes
 module _feet_holes() {
     center        = horizontal_plate_width / 2;
@@ -110,6 +138,42 @@ module feet_pockets() {
         translate([0, feet_pocket_size[1] / 2, 0])
             _feet_holes();
     }
+}
+
+// feet bolt holes
+module _feet_holes_bolts() {
+    translate([feet_pocket_margin[3] + (bolt_mount_spacing + feet_pocket_size[0])/2, 0, 0])
+        circle(bolt_hole_width/2);
+    translate([(horizontal_plate_width - feet_pocket_size[0]) / 2 + (bolt_mount_spacing + feet_pocket_size[0]) / 2, 0, 0])
+        circle(bolt_hole_width / 2);
+    translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1] + (bolt_mount_spacing + feet_pocket_size[0]) / 2, 0, 0])
+        circle(bolt_hole_width / 2);
+           
+}
+
+// feet pockets (bolts)
+module _feet_pockets_bolts() {
+    translate([feet_pocket_margin[3], 0, 0])
+        bolt_pegs(); 
+    translate([(horizontal_plate_width - feet_pocket_size[0]) / 2, 0, 0])
+        bolt_pegs();
+    translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1], 0, 0])
+        bolt_pegs() ;
+}
+
+module feet_pockets_bolts() {
+    translate([-(bolt_mount_spacing)/2,0,0]) {
+    translate([0, feet_pocket_margin[2], 0]) {
+        _feet_pockets_bolts();
+        translate([0, feet_pocket_size[1] / 2, 0])
+            _feet_holes_bolts();
+    }
+    translate([0, horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0], 0]) {
+        _feet_pockets_bolts();
+        translate([0, feet_pocket_size[1] / 2, 0])
+            _feet_holes_bolts();
+    }
+}
 }
 
 // horizontal base plate
@@ -243,11 +307,13 @@ module horizontal_plate() {
             y_idler_mount();
             y_motor_mount();
         }
-        z_triangle_pockets();
+        if (bolt_fastening==0) z_triangle_pockets();
+        if (bolt_fastening==1) z_triangle_pockets_bolts();
         z_plate_pockets();
         y_motor_pockets();
         y_rod_pockets();
-        feet_pockets();
+        if (bolt_fastening==0) feet_pockets();
+        if (bolt_fastening==1) feet_pockets_bolts();
         z_motor_mount();
         mega_mount_horizontal();
         rpi_mount_horizontal();
@@ -255,8 +321,8 @@ module horizontal_plate() {
         cable_mount_horizontal();
         LCD_cable_through_hole();
     }
-    translate([0, -feet_height - sheet_thickness - 20, 0])
-        feet();
+        if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();         
+        if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 20, 0]) feet_bolts();
     translate([(horizontal_plate_width - bed_width) / 2, (horizontal_plate_height - bed_height) / 2, 0])
         bed();
 }

@@ -13,15 +13,50 @@ use     <shapes.scad>
 
 // feet
 module feet() {
-    render() difference() {
+    render() 
+    difference() 
+    {    
         rounded_square(feet_width, feet_height, corner_radius = [0, 0, feet_corners[3], feet_corners[0]]);
         translate([z_plate_pocket_size[0], 0, 0])
             y_mount(feet_width - (z_plate_pocket_size[0] * 2), feet_height - feet_gap_height, [feet_corners[1], feet_corners[2], feet_corners[3], feet_corners[0]]);
-    }
+   }
     translate([feet_pocket_margin[3], feet_height, 0])
         square(feet_pocket_size);
     translate([(horizontal_plate_width - feet_pocket_size[0]) / 2, feet_height, 0])
         square(feet_pocket_size);
     translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1], feet_height, 0])
         square(feet_pocket_size);
+}   
+
+module feet_bolts() {
+    render() 
+    difference() 
+    {    
+        rounded_square(feet_width, feet_height, corner_radius = [0, 0, feet_corners[3], feet_corners[0]]);
+        translate([z_plate_pocket_size[0], 0, 0])
+            y_mount(feet_width - (z_plate_pocket_size[0] * 2), feet_height - feet_gap_height, [feet_corners[1], feet_corners[2], feet_corners[3], feet_corners[0]]);
+       translate([-(bolt_mount_spacing)/2,0,0]) 
+        {
+    translate([feet_pocket_margin[3], feet_height, 0])
+        bolt_hole();
+    translate([(horizontal_plate_width - feet_pocket_size[0]) / 2, feet_height, 0])
+        bolt_hole();
+    translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1], feet_height, 0])
+        bolt_hole();
+           };
+   };
+          translate([-(bolt_mount_spacing)/2,0,0]) 
+        {
+    translate([feet_pocket_margin[3], feet_height, 0])
+        bolt_pegs();
+    translate([(horizontal_plate_width - feet_pocket_size[0]) / 2, feet_height, 0])
+        bolt_pegs();
+    translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1], feet_height, 0])
+        bolt_pegs();
+        };
 }
+
+if (bolt_fastening==0) feet();         
+if (bolt_fastening==1) feet_bolts();         
+
+      
