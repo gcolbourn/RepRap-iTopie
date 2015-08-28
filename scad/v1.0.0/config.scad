@@ -33,7 +33,7 @@ m4_screw_radius                = 2;                     // M4 screw radius
 
 // horizontal plate
 horizontal_plate_width         = 390;                   // outer width
-horizontal_plate_height        = 440;                   // outer height
+horizontal_plate_height        = 425;                   // outer height
 horizontal_plate_borders       = [40, 82, 40, 82];      // borders weight       [top, right, bottom, left]
 horizontal_plate_outer_corners = [10, 10, 10, 10];      // outer corners radius [topLeft, topRight, bottomRight, bottoLeft]
 horizontal_plate_inner_corners = [30, 30, 30, 30];      // inner corners radius [topLeft, topRight, bottomRight, bottoLeft]
@@ -67,7 +67,7 @@ y_endstop_holes_radius         = m3_screw_radius;       // endstop screws holes 
 y_endstop_holes_spacing        = 9.5;                   // between the two endstop screws (axis to axis)
 
 // y rod pockets
-y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 20];               // pockets size   [width, height]
+y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 17.5];               // pockets size   [width, height]
 echo("y_rod_pocket_size",y_rod_pocket_size);
 y_rod_pocket_spacing           = undef;                 // pockets spacing (axis to axis) [undef = auto]
 
@@ -93,7 +93,8 @@ z_triangle_holes_margin        = 20;                    // z triangle screws mar
 
 // z plate pockets
 z_plate_pocket_size            = [40, sheet_thickness]; // pockets size   [width, height]
-z_plate_pocket_margin          = [138, 0, undef, 0];    // pockets margin [top, right, ---, left]        
+z_plate_pocket_margin          = [180, 0, undef, 0];    // pockets margin [top, right, ---, left]        
+
 
 // z motor mount
 z_motor_mount_margin           = 8;                     // between the "motor" and the "z_plate" (border to border)
