@@ -42,6 +42,7 @@ horizontal_plate_inner_corners = [30, 30, 30, 30];      // inner corners radius 
 y_idler_mount_width            = 44;                    // idler mount width
 y_idler_mount_height           = 24;                    // idler mount height
 y_idler_mount_corners          = [5, 5, 10, 10];        // corners radius [topLeft, topRight, bottomRight, bottoLeft]
+y_idler_mount_hole_radius      = 2;                   // y idler bearing hole radius
 
 // y idler pocket
 y_idler_pocket_width           = undef;                 // idler pocket width [undef = auto]

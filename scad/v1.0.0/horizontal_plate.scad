@@ -224,10 +224,16 @@ module y_idler_mount() {
     render() difference() {
         translate([(horizontal_plate_width - y_idler_mount_width) / 2, horizontal_plate_borders[2], 0])
             y_mount(y_idler_mount_width, y_idler_mount_height, y_idler_mount_corners);
-        translate([(horizontal_plate_width - _y_idler_pocket_width) / 2, horizontal_plate_borders[2] + y_idler_mount_height, 0])
+       // translate([(horizontal_plate_width - _y_idler_pocket_width) / 2, horizontal_plate_borders[2] + y_idler_mount_height, 0])
             mirror([0, 1, 0])
                 y_mount(_y_idler_pocket_width, y_idler_pocket_height, [top_radius, top_radius, bottom_radius, bottom_radius]);
     }
+}
+
+// y idler mount
+module y_idler_hole() {
+    translate([horizontal_plate_width  / 2, horizontal_plate_borders[2] + y_idler_mount_height / 2, 0])
+        circle(y_idler_mount_hole_radius);
 }
 
 // y motor mount
@@ -312,6 +318,7 @@ module horizontal_plate() {
         z_plate_pockets();
         y_motor_pockets();
         y_rod_pockets();
+        y_idler_hole();
         if (bolt_fastening==0) feet_pockets();
         if (bolt_fastening==1) feet_pockets_bolts();
         z_motor_mount();
