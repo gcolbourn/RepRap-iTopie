@@ -28,6 +28,34 @@ module z_triangle_holes() {
         circle(z_triangle_holes_radius);
 }
 
+// triangles bolt holes
+module z_triangle_holes_bolts() {
+    half_pocket = feet_pocket_size[0] / 2;
+    min = 20 + half_pocket;
+    max = _triangle_height - feet_pocket_size[0] + half_pocket;
+    mid = (max - min) / 4;
+    
+    translate([-(18-2-feet_pocket_size[1])/2, min + mid, 0])
+        circle(bolt_hole_width / 2);
+   translate([-(18-2-feet_pocket_size[1])/2, max - mid, 0])
+        circle(bolt_hole_width / 2);
+}
+
+module rear_triangle_holes_bolts() {
+    // side holes
+         translate([0,-bolt_mount_spacing,0]) 
+            {
+            translate([0, 20 + bolt_mount_spacing + (bolt_mount_spacing + feet_pocket_size[0]) / 2, 0])
+        circle(bolt_hole_width / 2);
+            translate([0, (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2 + (bolt_mount_spacing + feet_pocket_size[0])/2, 0])
+        circle(bolt_hole_width / 2);
+            translate([0, _triangle_height - feet_pocket_size[0] + (bolt_mount_spacing + feet_pocket_size[0])/2, 0])
+        circle(bolt_hole_width / 2);
+            };
+        }
+
+
+
 // z rod holder holes
 module z_rod_holder_holes() {
     circle(z_rod_holder_holes_radius);
@@ -86,10 +114,10 @@ module vertical_base_plate() {
             rounded_square(vertical_plate_width, vertical_plate_height - total_feet_height, corner_radius = [vertical_plate_outer_corners[0], vertical_plate_outer_corners[1], 0, 0]);
             translate([vertical_plate_borders[3], 0, 0])
                 y_mount(vertical_plate_inner_width, vertical_plate_inner_height - total_feet_height, [vertical_plate_inner_corners[0], vertical_plate_inner_corners[1], 0, 0]);
-            translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0])
-                rear_triangle_pockets();
-            translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0])
-                rear_triangle_pockets();
+            if (bolt_fastening==0) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0]) rear_triangle_pockets();
+            if (bolt_fastening==0) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets();
+            if (bolt_fastening==1) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0]) rear_triangle_pockets_bolts();
+            if (bolt_fastening==1) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets_bolts();
             // Logos
             if (nlogos == 1) {
             translate([1 * vertical_plate_width / 3,0,0]) 
@@ -114,10 +142,10 @@ module vertical_base_plate() {
  
             cable_mount_vertical();
             
-            translate([vertical_plate_borders[3] / 2, 0, 0])
-                z_triangle_holes();
-            translate([vertical_plate_width - (vertical_plate_borders[1] / 2), 0, 0])
-                z_triangle_holes();
+            if (bolt_fastening==0) translate([-(18-2-feet_pocket_size[1])/2 + vertical_plate_borders[3] / 2, 0, 0]) z_triangle_holes();
+            if (bolt_fastening==0) translate([(18-2-feet_pocket_size[1])/2 + vertical_plate_width - (vertical_plate_borders[1] / 2), 0, 0]) z_triangle_holes();
+            if (bolt_fastening==1) translate([-(18-2-feet_pocket_size[1])/2 + vertical_plate_borders[3] / 2, 0, 0]) rear_triangle_holes_bolts();
+            if (bolt_fastening==1) translate([(18-2-feet_pocket_size[1])/2 + vertical_plate_width - (vertical_plate_borders[1] / 2), 0, 0]) rear_triangle_holes_bolts();
             translate([0, vertical_plate_height - total_feet_height - z_rod_holder_holes_spacing, 0]) {
                 width  = (horizontal_plate_width - _z_motor_mount_spacing) / 2;
                 margin = width - z_rod_pocket_spacing + z_rod_holder_holes_margin[1];
@@ -138,11 +166,16 @@ module rear_triangle_pockets() {
     rear_triangle_fingers();
 }
 
+// rear triangle pockets (bolts)
+module rear_triangle_pockets_bolts() {
+    rear_triangle_fingers_bolts();
+}
+
 // vertical plate
 module vertical_plate() {
     vertical_base_plate();
     rear_triangles();
-    translate([0, -feet_height - sheet_thickness - 20, 0])
-        feet();
+        if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();
+        if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 20, 0]) feet_bolts();
 }
 vertical_plate();
