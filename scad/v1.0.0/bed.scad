@@ -50,6 +50,38 @@ module bed_squares() {
 
 }
 
+// bed trapeziums
+module _trapezium(bottom_width, top_width, height) {
+    minkowski() {
+        circle(bed_corner_radius);
+        offset(-bed_triangle_offset) 
+            polygon(points=[[-bottom_width / 2, 0], [bottom_width / 2, 0], [top_width / 2, height], [- top_width / 2, height]], paths=[[0, 1, 2, 3]]);
+    }
+}
+
+module _trap1(){
+       _trapezium(0.9 *bed_base_width , 0.9 * bed_base_width / 4, 0.9 * 3 * bed_base_width / 8);
+}
+
+module bed_trapeziums() {
+    // left side
+    translate([-bed_margin[0] - 10, 18 + 3 * bed_base_height / 4, 0]) 
+    rotate([0, 0, -90])
+            _trap1();
+    translate([-bed_margin[0] - 10,  4 + 1 * bed_base_height / 4, 0]) 
+    rotate([0, 0, -90])
+            _trap1();
+    // right side
+    translate([bed_margin[0] + bed_holes_spacing[1] + 0.9 * 1 * bed_base_width / 8, 18 + 3 * bed_base_height / 4, 0]) 
+    rotate([0, 0, 90])
+            _trap1();
+    translate([bed_margin[0] + bed_holes_spacing[1] + 0.9 * 1 * bed_base_width / 8, 4 + 1 * bed_base_height / 4, 0]) 
+    rotate([0, 0, 90])
+            _trap1();    
+    };
+    
+
+
 // bed cross
 module bed_cross() {
     hull() {
@@ -181,6 +213,9 @@ module bed() {
         bed_holes();
         bed_triangles();
         bed_squares();
+        bed_trapeziums();
     }
 }
 bed();
+//_trapezium(200, 100, 100);
+//bed_trapeziums();
