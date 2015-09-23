@@ -19,13 +19,15 @@ bolt_fastening                 = 1;                       // fasten with bolts [
 // horizontal plate ----------------------------------------------- //
 // ---------------------------------------------------------------- //
 // sheet thickness (raw material)
-sheet_thickness                = 6;                    // raw sheet thickness
+//sheet_thickness                = 18;                    // raw sheet thickness [MDF]
+sheet_thickness                = 6.25;                    // raw sheet thickness (6mm aluminium - taking into account error)
 
 // ---------------------------------------------------------------- //
 // shortcuts ------------------------------------------------------ //
 // ---------------------------------------------------------------- //
-m3_screw_radius                = 1.5;                   // M3 screw radius
-m4_screw_radius                = 2;                     // M4 screw radius
+//m3_screw_radius                = 1.5;                   // M3 screw radius
+m3_screw_radius                = 1.6;                   // M3 screw radius (taking into account error)
+m4_screw_radius                = 2.15;                     // M4 screw radius
 
 // ---------------------------------------------------------------- //
 // horizontal plate ----------------------------------------------- //
@@ -77,7 +79,8 @@ y_rod_holes_radius             = m3_screw_radius;       // y rod screws holes ra
 y_rod_holes_margin             = 4;                     // y rod screws margin (from y rod pocket border)
 
 // feet pockets
-feet_pocket_size               = [20, sheet_thickness]; // pockets size   [width, height]
+feet_pocket_size               = [20, sheet_thickness]; // pockets size   [width, height];
+feet_peg_size                  = [20 - 0.25, sheet_thickness - 0.25]; // pegs size   [width, height]; -0.25 taking into account cutting error
 feet_pocket_margin             = [10.5, 40, 10.5, 40];  // pockets margin [top, right, bottom, left]
 
 // feet holes
@@ -131,18 +134,18 @@ lcd_mount_holes_offset_x     = 7.5;                     // horizontal offset of 
 lcd_mount_holes_offset_z     = 12.5;                    // vertical offset of LCD mount holes from top right of screen
 lcd_mount_holes_radius       = m3_screw_radius;         // LCD mount holes radius
 lcd_dial_hole_offset_x       = 0;                       // horizontal offset of LCD dial hole from top right of screen
-lcd_dial_hole_offset_z       = -lcd_screen_height - 24; // vertical offset of LCD dial hole from top right of screen
-lcd_dial_hole_radius         = 7.5;                     // LCD dial hole radius
+lcd_dial_hole_offset_z       = -lcd_screen_height - 24.5; // vertical offset of LCD dial hole from top right of screen
+lcd_dial_hole_radius         = 8;                     // LCD dial hole radius
 lcd_reset_hole_offset_x      = -33;                     // horizontal offset of LCD reset hole from bottom left of screen
 lcd_reset_hole_offset_z      = lcd_dial_hole_offset_z;  // vertical offset of LCD reset hole from bottom left of screen
 lcd_reset_hole_radius        = 2;                       // LCD reset hole radius
-lcd_contrast_hole_offset_x   = -lcd_screen_width;       // horizontal offset of LCD contrast hole from bottom left of screen
-lcd_contrast_hole_offset_z   = -lcd_screen_height - 20;  // vertical offset of LCD contrast hole from bottom left of screen
+lcd_contrast_hole_offset_x   = -lcd_screen_width - 2;       // horizontal offset of LCD contrast hole from bottom left of screen
+lcd_contrast_hole_offset_z   = -lcd_screen_height - 22;  // vertical offset of LCD contrast hole from top left of screen
 lcd_contrast_hole_radius     = 4;                       // LCD contrast hole radius
 
 // vertical plate
 vertical_plate_width         = horizontal_plate_width;  // outer width
-vertical_plate_height        = horizontal_plate_height; // outer height
+vertical_plate_height        = horizontal_plate_height + 14; // outer height
 vertical_plate_borders       = [100, 60, undef, 60];     // borders weight       [top, right, bottom, left]
 vertical_plate_outer_corners = [10, 10, 10, 10];        // outer corners radius [topLeft, topRight, bottomRight, bottoLeft]
 vertical_plate_inner_corners = [10, 10, 10, 10];        // inner corners radius [topLeft, topRight, bottomRight, bottoLeft]
@@ -169,7 +172,7 @@ spooler_width                = 30;                      // width of arm for spoo
 spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
 spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
 
-spooler_mount_holes_radius   = 8;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer)
+spooler_mount_holes_radius   = 4.15;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer)
 
 bowden_mount_holes_spacing   = 32;                      // spacing between bowden mount holes
 bowden_mount_holes_radius    = m4_screw_radius;         // radius of bowden mount holes
@@ -181,7 +184,7 @@ mega_mount_holes_spacing_x1  = 75;                      // spacing between Mega 
 mega_mount_holes_spacing_x2  = 82.5;                    // spacing between Mega 2560 mount holes (x2)
 mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
 mega_mount_holes_radius      = m3_screw_radius;         // radius of Mega 2560 mount holes
-mega_margin                 = [8, 13];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way)
+mega_margin                 = [18, 18];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way)
 
 module _mega_holes(){
             circle(mega_mount_holes_radius);  
@@ -194,7 +197,7 @@ module _mega_holes(){
 psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU mount holes (x)
 psu_mount_holes_spacing_y  = 95;                         // spacing between PSU mount holes (y)
 psu_mount_holes_radius     = m3_screw_radius;            // radies of PSU mount holes
-psu_margin                 = [30, 10];                   // spacing of holes from edge of PSU [x, y]
+psu_margin                 = [60, 12];                   // spacing of holes from edge of PSU [x, y]
 
 rpi_mount_holes_spacing_x  = 57;                         // spacing between Raspberry Pi mount holes (x)
 rpi_mount_holes_spacing_y  = 48;                         // spacing between Raspberry Pi mount holes (y)
@@ -231,19 +234,19 @@ y_belt_holder_screw_spacing = 16;                       // y belt holder holes s
 // y lm8uu holder
 y_lm8_holder_screw_spacing  = 20;                       // y lm8uu holder holes spacing (axis to axis) [24 is default iTopie; 20 is for lm8uus mounted directly to plate like Prusa i3)
 y_lm8_rounding_radius       = 2;                        // radius to round corners of LM8UU holes by
-y_lm8_hole                  = [10 - y_lm8_rounding_radius, 25 - y_lm8_rounding_radius];// y lm8uu bearing hole [width, length]
+y_lm8_hole                  = [10.75 - 2 * y_lm8_rounding_radius, 25 - 2 * y_lm8_rounding_radius];// y lm8uu bearing hole [width, length]
 y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical spacing (axis to axis)
 
 // ---------------------------------------------------------------- //
 // bolt fastening option ------------------------------------------ //
 // ---------------------------------------------------------------- //
 bolt_mount_spacing          = 40;
-bolt_hole_depth             = 31 - sheet_thickness;
-//bolt_hole_depth             = 25;
-bolt_hole_width             = 2 * m4_screw_radius + 0.5;
+bolt_length                 = 25; //M4x30 can be used for both 6mm and 18mm sheet thickness
+bolt_hole_depth             = bolt_length + 1 - sheet_thickness; //M4x25 can be used for both 6mm and 18mm sheet thickness
+bolt_hole_width             = 2 * m4_screw_radius;
 bolt_nut_hole_width         = 8;
 bolt_nut_hole_depth         = 4;
-bolt_nut_hole_position      = 28 - sheet_thickness;
+bolt_nut_hole_position      = bolt_length - 2 - sheet_thickness;
 //bolt_nut_hole_position      = 21;
 
 module bolt_hole() {
@@ -256,9 +259,9 @@ module bolt_hole() {
 
 module bolt_pegs() {
    translate([0,0,0])
-        square(feet_pocket_size);
+        square(feet_peg_size);
    translate([bolt_mount_spacing, 0, 0])
-        square(feet_pocket_size);
+        square(feet_peg_size);
 }
 
 //if (bolt_fastening==0) y_rod_pocket_size=[8, 20];               // pockets size   [width, height]

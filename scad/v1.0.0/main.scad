@@ -17,5 +17,5 @@ use     <vertical_plate.scad>
 // build
 translate([-horizontal_plate_width - 10, 10, 0])
     horizontal_plate();
-translate([10, 10, 0])
+translate([10, -4, 0])
     vertical_plate();

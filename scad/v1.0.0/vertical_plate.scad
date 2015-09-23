@@ -116,8 +116,8 @@ module vertical_base_plate() {
                 y_mount(vertical_plate_inner_width, vertical_plate_inner_height - total_feet_height, [vertical_plate_inner_corners[0], vertical_plate_inner_corners[1], 0, 0]);
             if (bolt_fastening==0) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0]) rear_triangle_pockets();
             if (bolt_fastening==0) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets();
-            if (bolt_fastening==1) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0]) rear_triangle_pockets_bolts();
-            if (bolt_fastening==1) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets_bolts();
+            if (bolt_fastening==1) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], -0.125, 0])rear_triangle_pockets_bolts();
+            if (bolt_fastening==1) translate([vertical_plate_width - z_triangle_pocket_margin[1], -0.125, 0]) rear_triangle_pockets_bolts();
             // Logos
             if (nlogos == 1) {
             translate([1 * vertical_plate_width / 3,0,0]) 
@@ -149,9 +149,9 @@ module vertical_base_plate() {
             translate([0, vertical_plate_height - total_feet_height - z_rod_holder_holes_spacing, 0]) {
                 width  = (horizontal_plate_width - _z_motor_mount_spacing) / 2;
                 margin = width - z_rod_pocket_spacing + z_rod_holder_holes_margin[1];
-                translate([margin, 0, 0])
-                    z_rod_holder_holes();
-                translate([horizontal_plate_width - z_rod_holder_holes_spacing - margin, 0, 0])
+                translate([margin, 10, 0])
+                   z_rod_holder_holes();
+                translate([horizontal_plate_width - z_rod_holder_holes_spacing - margin, 10, 0])
                     z_rod_holder_holes();
             }
         }
@@ -167,15 +167,28 @@ module rear_triangle_pockets() {
 }
 
 // rear triangle pockets (bolts)
+
+module bolt_pockets_triangles() {
+   translate([0,-bolt_mount_spacing,0])
+        square([feet_pocket_size[1], feet_pocket_size[0]]);
+   translate([0, 0, 0])
+        square([feet_pocket_size[1], feet_pocket_size[0]]);
+  };
+  
 module rear_triangle_pockets_bolts() {
-    rear_triangle_fingers_bolts();
-}
+    translate([-feet_pocket_size[1] , -0.125 + 20 + bolt_mount_spacing, 0])
+        bolt_pockets_triangles();
+    translate([-feet_pocket_size[1], -0.125 + (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
+        bolt_pockets_triangles();
+    translate([-feet_pocket_size[1] , -0.125 + _triangle_height - feet_pocket_size[0], 0])
+        bolt_pockets_triangles();
+    }
 
 // vertical plate
 module vertical_plate() {
     vertical_base_plate();
     rear_triangles();
-        if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();
-        if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 20, 0]) feet_bolts();
+        if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 6, 0]) feet();
+        if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 6, 0]) feet_bolts();
 }
 vertical_plate();

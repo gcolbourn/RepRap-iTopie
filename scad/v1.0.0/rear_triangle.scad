@@ -30,12 +30,12 @@ module rear_triangle_fingers() {
 
 module bolt_pegs_triangles() {
    translate([0,-bolt_mount_spacing,0])
-        square([feet_pocket_size[1], feet_pocket_size[0]]);
+        square([feet_peg_size[1], feet_peg_size[0]]);
    translate([0, 0, 0])
-        square([feet_pocket_size[1], feet_pocket_size[0]]);
+        square([feet_peg_size[1], feet_peg_size[0]]);
   };
   
-module bolt_hole_tringle() {
+module bolt_hole_triangle() {
     translate([0, (bolt_mount_spacing + feet_pocket_size[0] - bolt_hole_width)/2, 0])
     square([bolt_hole_depth,bolt_hole_width]);
     translate([bolt_nut_hole_position - bolt_nut_hole_depth, (bolt_mount_spacing + feet_pocket_size[0] - bolt_nut_hole_width)/2, - 0])
@@ -44,14 +44,14 @@ module bolt_hole_tringle() {
 }
   
 module rear_triangle_fingers_bolts() {
-    translate([-feet_pocket_size[1] , 20 + bolt_mount_spacing, 0])
+    translate([-feet_peg_size[1] , 20 + bolt_mount_spacing, 0])
         bolt_pegs_triangles();
-    translate([-feet_pocket_size[1], (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
+    translate([-feet_peg_size[1], (_triangle_height - 20 + feet_peg_size[0]) / 2 + bolt_mount_spacing / 2, 0])
         bolt_pegs_triangles();
-    translate([-feet_pocket_size[1] , _triangle_height - feet_pocket_size[0], 0])
+    translate([-feet_peg_size[1] , _triangle_height - feet_peg_size[0], 0])
         bolt_pegs_triangles();
-    margin =  z_plate_pocket_size[1] + z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
-    translate([margin - bolt_mount_spacing / 2, - feet_pocket_size[1], 0])
+    margin =  0.125 + z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    translate([margin - bolt_mount_spacing / 2, - feet_peg_size[1], 0])
         bolt_pegs();
 }
 
@@ -61,13 +61,13 @@ module rear_triangle_holes_bolts() {
          translate([0,-bolt_mount_spacing,0]) 
             {
             translate([0, 20 + bolt_mount_spacing, 0])
-                bolt_hole_tringle();
+                bolt_hole_triangle();
             translate([0, (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
-                bolt_hole_tringle();              
+                bolt_hole_triangle();              
             translate([0, _triangle_height - feet_pocket_size[0], 0])
-                bolt_hole_tringle();
+                bolt_hole_triangle();
             };
-            margin =  z_plate_pocket_size[1] + z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+            margin =  0.125 + z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
         translate([margin - bolt_mount_spacing / 2, bolt_hole_depth, 0])
             {
     // bottom hole
@@ -156,6 +156,12 @@ module rear_triangle() {
         };
 }
 
+// LCD cable through hole
+module LCD_cable_through_hole_triangle(){
+    translate([8, 0, 0])
+    square([20,10]);
+}
+
 
 module rear_triangles() {
     translate([0, total_feet_height - triangle_margin[0] - feet_pocket_size[1] - 35, 0]) {
@@ -164,6 +170,7 @@ module rear_triangles() {
             rear_triangle();
                     translate([1 * _triangle_width / 4 - 25, _triangle_height / 3-7, 0])
             _mega_holes();
+            LCD_cable_through_hole_triangle();
             }
             };
         translate([vertical_plate_inner_width + vertical_plate_borders[3] - feet_pocket_size[1] - triangle_margin[3], _triangle_height + 40, 0])
