@@ -20,14 +20,19 @@ bolt_fastening                 = 1;                       // fasten with bolts [
 // ---------------------------------------------------------------- //
 // sheet thickness (raw material)
 //sheet_thickness                = 18;                    // raw sheet thickness [MDF]
-sheet_thickness                = 6.25;                    // raw sheet thickness (6mm aluminium - taking into account error)
+sheet_thickness                = 5;                    // raw sheet thickness (taking into account error)
+//sheet_thickness                = 6.25;                    // raw sheet thickness (taking into account error for waterjet aluminium)
+
 
 // ---------------------------------------------------------------- //
 // shortcuts ------------------------------------------------------ //
 // ---------------------------------------------------------------- //
 //m3_screw_radius                = 1.5;                   // M3 screw radius
-m3_screw_radius                = 1.6;                   // M3 screw radius (taking into account error)
-m4_screw_radius                = 2.15;                     // M4 screw radius
+m3_screw_radius                = 1.5;                   // M3 screw radius (taking into account error)
+//m3_screw_radius                = 1.6;                   // M3 screw radius (taking into account error for waterjet aluminium)
+
+m4_screw_radius                = 2;                     // M4 screw radius
+//m4_screw_radius                = 2.1;                     // M4 screw radius (taking into account error for waterjet aluminium)
 
 // ---------------------------------------------------------------- //
 // horizontal plate ----------------------------------------------- //
@@ -80,7 +85,9 @@ y_rod_holes_margin             = 4;                     // y rod screws margin (
 
 // feet pockets
 feet_pocket_size               = [20, sheet_thickness]; // pockets size   [width, height];
-feet_peg_size                  = [20 - 0.25, sheet_thickness - 0.25]; // pegs size   [width, height]; -0.25 taking into account cutting error
+feet_peg_size                  = [20, sheet_thickness]; // pegs size   [width, height]; -0.25 taking into account cutting error
+
+//feet_peg_size                  = [20 - 0.25, sheet_thickness - 0.25]; // pegs size   [width, height]; -0.25 taking into account cutting error
 feet_pocket_margin             = [10.5, 40, 10.5, 40];  // pockets margin [top, right, bottom, left]
 
 // feet holes
@@ -106,7 +113,9 @@ z_motor_mount_spacing          = undef;                 // between the two motor
 
 // z motor mount
 z_rod_pocket_spacing           = 17;                    // between the "motor" and the "z rod" (axis to axis)
-z_rod_pocket_radius            = 4;                     // z smoothe rod radius
+z_rod_pocket_radius            = 3.9;                     // z smoothe rod radius (tight fit for M8)
+//z_rod_pocket_radius            = 4.05;                     // z smoothe rod radius (taking into account error for waterjet aluminium)
+
 
 // z rod top holder
 z_rod_holder_holes_radius      = m3_screw_radius;       // z rod top holder holes radius
@@ -172,7 +181,9 @@ spooler_width                = 30;                      // width of arm for spoo
 spooler_notch_length         = 25;                      // length of notch for rod to slide into for spool mount
 spooler_notch_width          = 8;                       // width of notch for rod to slide into for spool mount [M8 threaded rod]
 
-spooler_mount_holes_radius   = 4.15;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer)
+spooler_mount_holes_radius   = 4;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer)
+
+//spooler_mount_holes_radius   = 4.15;                       // radius of spooler mount holes (M8; for spool to be placed at side of printer) Taking into account error for waterjet aluminium
 
 bowden_mount_holes_spacing   = 32;                      // spacing between bowden mount holes
 bowden_mount_holes_radius    = m4_screw_radius;         // radius of bowden mount holes
@@ -198,6 +209,17 @@ psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU 
 psu_mount_holes_spacing_y  = 95;                         // spacing between PSU mount holes (y)
 psu_mount_holes_radius     = m3_screw_radius;            // radies of PSU mount holes
 psu_margin                 = [60, 12];                   // spacing of holes from edge of PSU [x, y]
+
+psu_width                  = 114;                        // width of PSU
+psu_height                 = 49;                         // height of PSU
+psu_socket_hole_width      = 30.5;                       // width of PSU socket hole
+psu_socket_hole_height     = 22.5;                       // height of PSU socket hole
+psu_socket_mount_spacing   = 40;                         // distance between holes for socket mount bolts
+psu_socket_mount_hole_r    = m3_screw_radius;            // radius of socket mount holes
+psu_switch_hole_width      = 30.5;                       // width of PSU socket hole
+psu_switch_hole_height     = 25.5;                       // height of PSU socket hole
+psu_mount_top_hole_margin  = 9;                          // distance from side of plastic PSU socket and switch mount to top mounting hole
+psu_mount_thickness = 3;                                 // thickness of plastic PSU socket and switch mount
 
 rpi_mount_holes_spacing_x  = 57;                         // spacing between Raspberry Pi mount holes (x)
 rpi_mount_holes_spacing_y  = 48;                         // spacing between Raspberry Pi mount holes (y)
@@ -240,10 +262,36 @@ y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical
 // ---------------------------------------------------------------- //
 // bolt fastening option ------------------------------------------ //
 // ---------------------------------------------------------------- //
+
+bolt_length_bigbox          = 16; //M3x18 for 5mm sheet thickness
+bolt_hole_depth_bigbox      = bolt_length_bigbox - sheet_thickness; //M3x18 for 5mm sheet thickness
+bolt_hole_width_bigbox      = 2 * m3_screw_radius + 0.2;
+bolt_nut_hole_width_bigbox  = 11;
+bolt_nut_hole_depth_bigbox  = 6;
+bolt_nut_hole_gap_bigbox    = 3;
+bolt_nut_hole_position_bigbox = bolt_length_bigbox + bolt_nut_hole_gap_bigbox - sheet_thickness;
+
+module bolt_hole_bigbox() {
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_hole_width_bigbox)/2, - bolt_hole_depth_bigbox, 0])
+    square([bolt_hole_width_bigbox, bolt_hole_depth_bigbox]);
+    translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_nut_hole_width_bigbox)/2, - bolt_nut_hole_position_bigbox, 0]){
+         square([bolt_nut_hole_width_bigbox, bolt_nut_hole_gap_bigbox]);
+         translate([bolt_nut_hole_width_bigbox/2,bolt_nut_hole_gap_bigbox,0]) 
+         difference(){
+             scale([1,12/11]) circle(r=bolt_nut_hole_width_bigbox/2);
+             translate([-(bolt_nut_hole_depth_bigbox*2)/2,-bolt_nut_hole_depth_bigbox,0])
+             square([bolt_nut_hole_depth_bigbox*2, bolt_nut_hole_depth_bigbox]);
+         };
+    };
+}
+
+
+
 bolt_mount_spacing          = 40;
 bolt_length                 = 25; //M4x30 can be used for both 6mm and 18mm sheet thickness
 bolt_hole_depth             = bolt_length + 1 - sheet_thickness; //M4x25 can be used for both 6mm and 18mm sheet thickness
-bolt_hole_width             = 2 * m4_screw_radius;
+//bolt_hole_width             = 2 * m4_screw_radius; //M4 bolts
+bolt_hole_width             = bolt_hole_width_bigbox; //M3 bolts, using bigbox reinforced joints with semi-circular injection molded parts
 bolt_nut_hole_width         = 8;
 bolt_nut_hole_depth         = 4;
 bolt_nut_hole_position      = bolt_length - 2 - sheet_thickness;
@@ -254,15 +302,15 @@ module bolt_hole() {
     square([bolt_hole_width, bolt_hole_depth]);
     translate([(bolt_mount_spacing + feet_pocket_size[0] - bolt_nut_hole_width)/2, - bolt_nut_hole_position, 0])
     square([bolt_nut_hole_width, bolt_nut_hole_depth]);
-
-}
+};
 
 module bolt_pegs() {
    translate([0,0,0])
         square(feet_peg_size);
    translate([bolt_mount_spacing, 0, 0])
         square(feet_peg_size);
-}
+};
+
 
 //if (bolt_fastening==0) y_rod_pocket_size=[8, 20];               // pockets size   [width, height]
 //if (bolt_fastening==1) y_rod_pocket_size=[5.5, 20];               // pockets size   [width, height]. 5.5 so M8 rods can rest on top 

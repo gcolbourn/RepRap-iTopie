@@ -38,11 +38,11 @@ module feet_bolts() {
        translate([-(bolt_mount_spacing)/2,0,0]) 
         {
     translate([feet_pocket_margin[3], feet_height, 0])
-        bolt_hole();
+        bolt_hole_bigbox();
     translate([(horizontal_plate_width - feet_pocket_size[0]) / 2, feet_height, 0])
-        bolt_hole();
+        bolt_hole_bigbox();
     translate([horizontal_plate_width - feet_pocket_size[0] - feet_pocket_margin[1], feet_height, 0])
-        bolt_hole();
+        bolt_hole_bigbox();
            };
    };
           translate([-(bolt_mount_spacing)/2,0,0]) 
@@ -58,5 +58,3 @@ module feet_bolts() {
 
 if (bolt_fastening==0) feet();         
 if (bolt_fastening==1) feet_bolts();         
-
-      

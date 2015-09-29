@@ -55,17 +55,17 @@ module rear_triangle_holes_bolts() {
          translate([0,-bolt_mount_spacing,0]) 
             {
             translate([0, 20 + bolt_mount_spacing, 0])
-                rotate([0,0,90]) bolt_hole();
+                rotate([0,0,90]) bolt_hole_bigbox();
             translate([0, (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
-                rotate([0,0,90]) bolt_hole();              
+                rotate([0,0,90]) bolt_hole_bigbox();              
             translate([0, _triangle_height - feet_pocket_size[0], 0])
-                rotate([0,0,90]) bolt_hole();  
+                rotate([0,0,90]) bolt_hole_bigbox();  
             };
     // bottom hole
             margin =  z_plate_pocket_margin[0] - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
             translate([margin + bolt_mount_spacing, 0, 0])
             rotate([0,0,180]) 
-            bolt_hole();  
+            bolt_hole_bigbox();  
         }
 
         

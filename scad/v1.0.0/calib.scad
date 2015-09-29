@@ -30,8 +30,10 @@ translate([-12,8]) feet_pockets_bolts();
 };
     
 difference(){
-    square([75,30]);
-    translate([8, 30]) bolt_hole();
+    square([75,30 - sheet_thickness]);
+    translate([8, 30 - sheet_thickness]) bolt_hole_bigbox();
 };
-translate([8, 30])
+translate([8, 30 - sheet_thickness])
 bolt_pegs();
+
+
