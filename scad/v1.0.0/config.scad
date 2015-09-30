@@ -72,7 +72,7 @@ y_endstop_mount_position       = 82;                    // from the frame top bo
 
 // y endstop screws holes
 y_endstop_holes_radius         = m3_screw_radius;       // endstop screws holes radius
-y_endstop_holes_spacing        = 9.5;                   // between the two endstop screws (axis to axis)
+y_endstop_holes_spacing        = 19;                   // between the two endstop screws (axis to axis)
 
 // y rod pockets
 y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 17.8];               // pockets size   [width, height]

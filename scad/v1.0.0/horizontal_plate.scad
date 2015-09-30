@@ -93,7 +93,7 @@ module bolt_hole() {
 
 // z triangle pockets (bolts)
 module z_triangle_pockets_bolts() {
-    margin_top =  horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    margin_top = horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
     translate([z_triangle_pocket_margin[3], margin_top, 0]) {
         {translate([0,- bolt_mount_spacing / 2,0]) square(z_triangle_pocket_size);};
         {translate([0, bolt_mount_spacing - bolt_mount_spacing/2, 0]) square(z_triangle_pocket_size);};
@@ -267,13 +267,13 @@ module y_motor_pockets() {
 // y endstop mount
 module y_endstop_mount() {
     holes_center = y_endstop_mount_height / 2;
-    translate([horizontal_plate_borders[3], horizontal_plate_height - y_endstop_mount_position, 0]) {
+    translate([horizontal_plate_width - horizontal_plate_borders[3], horizontal_plate_height - y_endstop_mount_position, 0]) {
         render() difference() {
-            rotate([0, 0, -90])
+            rotate([0, 0, 90])
                 y_mount(y_endstop_mount_height, y_endstop_mount_width, y_endstop_mount_corners);
-            translate([7, -holes_center, 0])
+            translate([-16.5, holes_center, 0])
                 circle(y_endstop_holes_radius);
-            translate([7 + y_endstop_holes_spacing, -holes_center, 0])
+            translate([3, holes_center, 0])
                 circle(y_endstop_holes_radius);
         }
     }
@@ -317,10 +317,14 @@ module horizontal_plate() {
     render() difference() {
         render() union() { 
             horizontal_base_plate();
+            //translate([horizontal_plate_width, 2*(horizontal_plate_height - y_endstop_mount_position), 0]) rotate([0,0,180]) 
             y_endstop_mount();
             y_idler_mount();
             y_motor_mount();
         }
+        //second hole for endstop with 19 mm mount spacing
+                        translate([horizontal_plate_width - horizontal_plate_borders[3] + 2.5, horizontal_plate_height - y_endstop_mount_position + y_endstop_mount_height / 2, 0]) circle(y_endstop_holes_radius);
+
         if (bolt_fastening==0) z_triangle_pockets();
         if (bolt_fastening==1) z_triangle_pockets_bolts();
         z_plate_pockets();
