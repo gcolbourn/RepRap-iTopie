@@ -128,9 +128,16 @@ module rear_triangle() {
     rear_triangle_holes_bolts();
     
 //spooler mount holes
-            translate([3 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
+            translate([3 * _triangle_width / 4 - 10, _triangle_height / 8, 0])
             circle(spooler_mount_holes_radius);  
-            translate([1 * _triangle_width / 4 - 10, _triangle_height / 4, 0])
+            translate([1 * _triangle_width / 4 - 10, _triangle_height / 8, 0])
+            circle(spooler_mount_holes_radius);  
+            //central adjustable hole for spool lock
+            translate([1 * _triangle_width / 2 - 10, 10 + _triangle_height / 8, 0])
+            circle(spooler_mount_holes_radius);  
+            translate([1 * _triangle_width / 2 - 10 - spooler_mount_holes_radius, 10 + _triangle_height / 8, 0])
+            square([2*spooler_mount_holes_radius,100-spooler_mount_holes_radius*2]);  
+            translate([1 * _triangle_width / 2 - 10, 100 + _triangle_height / 8, 0])
             circle(spooler_mount_holes_radius);  
 // Mega 2560 mount holes    
 //            translate([1 * _triangle_width / 4 - 18, _triangle_height / 3-3, 0])
