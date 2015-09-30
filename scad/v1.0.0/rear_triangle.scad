@@ -154,8 +154,8 @@ module LCD_cable_through_hole_triangle(){
 
 
 module rear_triangles() {
-    translate([0, total_feet_height - triangle_margin[0] - feet_pocket_size[1] - 35, 0]) {
-        translate([vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0]){
+    translate([3, sheet_thickness/2 + total_feet_height - triangle_margin[0] - feet_pocket_size[1] - 35, 0]) {
+        translate([-3*sheet_thickness/3 + vertical_plate_borders[3] + feet_pocket_size[1] + triangle_margin[1], 0, 0]){
             difference(){
             rear_triangle();
                     translate([1 * _triangle_width / 4 - 25, _triangle_height / 3-7, 0])
@@ -163,7 +163,7 @@ module rear_triangles() {
             LCD_cable_through_hole_triangle();
             }
             };
-        translate([vertical_plate_inner_width + vertical_plate_borders[3] - feet_pocket_size[1] - triangle_margin[3], _triangle_height + 40, 0])
+        translate([2*sheet_thickness/3 + vertical_plate_inner_width + vertical_plate_borders[3] - feet_pocket_size[1] - triangle_margin[3], _triangle_height + 40, 0])
             rotate([0, 0,180])
                 rear_triangle();
     }
