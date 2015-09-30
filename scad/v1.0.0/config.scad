@@ -75,7 +75,7 @@ y_endstop_holes_radius         = m3_screw_radius;       // endstop screws holes 
 y_endstop_holes_spacing        = 9.5;                   // between the two endstop screws (axis to axis)
 
 // y rod pockets
-y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 17.5];               // pockets size   [width, height]
+y_rod_pocket_size              =[8 - 2.5*bolt_fastening, 17.8];               // pockets size   [width, height]
 echo("y_rod_pocket_size",y_rod_pocket_size);
 y_rod_pocket_spacing           = undef;                 // pockets spacing (axis to axis) [undef = auto]
 

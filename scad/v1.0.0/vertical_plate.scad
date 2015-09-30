@@ -116,8 +116,8 @@ module vertical_base_plate() {
                 y_mount(vertical_plate_inner_width, vertical_plate_inner_height - total_feet_height, [vertical_plate_inner_corners[0], vertical_plate_inner_corners[1], 0, 0]);
             if (bolt_fastening==0) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0]) rear_triangle_pockets();
             if (bolt_fastening==0) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets();
-            if (bolt_fastening==1) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], -0.125, 0])rear_triangle_pockets_bolts();
-            if (bolt_fastening==1) translate([vertical_plate_width - z_triangle_pocket_margin[1], -0.125, 0]) rear_triangle_pockets_bolts();
+            if (bolt_fastening==1) translate([z_triangle_pocket_margin[3] + z_triangle_pocket_size[0], 0, 0])rear_triangle_pockets_bolts();
+            if (bolt_fastening==1) translate([vertical_plate_width - z_triangle_pocket_margin[1], 0, 0]) rear_triangle_pockets_bolts();
             // Logos
             if (nlogos == 1) {
             translate([1 * vertical_plate_width / 3,0,0]) 
@@ -176,11 +176,11 @@ module bolt_pockets_triangles() {
   };
   
 module rear_triangle_pockets_bolts() {
-    translate([-feet_pocket_size[1] , -0.125 + 20 + bolt_mount_spacing, 0])
+    translate([-feet_pocket_size[1] , 20 + bolt_mount_spacing, 0])
         bolt_pockets_triangles();
-    translate([-feet_pocket_size[1], -0.125 + (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
+    translate([-feet_pocket_size[1], (_triangle_height - 20 + feet_pocket_size[0]) / 2 + bolt_mount_spacing / 2, 0])
         bolt_pockets_triangles();
-    translate([-feet_pocket_size[1] , -0.125 + _triangle_height - feet_pocket_size[0], 0])
+    translate([-feet_pocket_size[1] , _triangle_height - feet_pocket_size[0], 0])
         bolt_pockets_triangles();
     }
 

@@ -39,7 +39,7 @@ module _y_rod_pockets() {
 }
 
 module y_rod_pockets() {
-    translate([0, horizontal_plate_borders[2] - y_rod_pocket_size[1], 0])
+    translate([0, horizontal_plate_borders[2] - y_rod_pocket_size[1] +0.001, 0])
         _y_rod_pockets();
     translate([0, horizontal_plate_height - horizontal_plate_borders[0], 0])
         _y_rod_pockets();
@@ -93,7 +93,7 @@ module bolt_hole() {
 
 // z triangle pockets (bolts)
 module z_triangle_pockets_bolts() {
-    margin_top = -0.125 + horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
+    margin_top =  horizontal_plate_height - z_triangle_pocket_size[1] - z_triangle_pocket_margin[0];
     translate([z_triangle_pocket_margin[3], margin_top, 0]) {
         {translate([0,- bolt_mount_spacing / 2,0]) square(z_triangle_pocket_size);};
         {translate([0, bolt_mount_spacing - bolt_mount_spacing/2, 0]) square(z_triangle_pocket_size);};
@@ -170,7 +170,7 @@ module _feet_pockets_bolts() {
 }
 
 module feet_pockets_bolts() {
-    translate([-(bolt_mount_spacing)/2 - 0.125,0,0]) {
+    translate([-(bolt_mount_spacing)/2,0,0]) {
     translate([0, feet_pocket_margin[2], 0]) {
         _feet_pockets_bolts();
         translate([0, feet_pocket_size[1] / 2, 0])
