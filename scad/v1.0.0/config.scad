@@ -68,7 +68,7 @@ motor_mount_holes_radius       = m3_screw_radius;       // motor screw holes rad
 y_endstop_mount_width          = 25;                    // endstop mount width
 y_endstop_mount_height         = 16.4;                  // endstop mount width
 y_endstop_mount_corners        = [8.2, 8.2, 10, 10];    // corners radius [topLeft, topRight, bottomRight, bottoLeft]
-y_endstop_mount_position       = 82;                    // from the frame top border to the endstop top border
+y_endstop_mount_position       = 105;                    // from the frame top border to the endstop top border
 
 // y endstop screws holes
 y_endstop_holes_radius         = m3_screw_radius;       // endstop screws holes radius

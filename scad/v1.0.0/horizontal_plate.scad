@@ -288,8 +288,8 @@ module y_endstop_mount() {
                 y_mount(y_endstop_mount_height, y_endstop_mount_width, y_endstop_mount_corners);
             translate([-16.5, holes_center, 0])
                 circle(y_endstop_holes_radius);
-            translate([3, holes_center, 0])
-                circle(y_endstop_holes_radius);
+            //translate([3, holes_center, 0])
+              //  circle(y_endstop_holes_radius);
         }
     }
 }
@@ -358,7 +358,7 @@ module horizontal_plate() {
     }
         if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();         
         if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 20, 0]) feet_bolts();
-    translate([(horizontal_plate_width - bed_width) / 2, (horizontal_plate_height - bed_height) / 2, 0])
+    translate([(horizontal_plate_width - bed_width) / 2, (horizontal_plate_height - bed_height) / 2 -15, 0])
         bed();
 }
 
