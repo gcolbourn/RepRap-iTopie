@@ -54,6 +54,21 @@ module z_plate_pockets() {
         square(z_plate_pocket_size);
 }
 
+//vertical (z) plate bolt holes
+module z_plate_bolt_holes() {
+    margin_top = horizontal_plate_height - z_plate_pocket_size[1] - z_plate_pocket_margin[0];
+    translate([z_plate_pocket_margin[3] + z_plate_pocket_size[0] 
+    + (vertical_plate_borders[3]-z_plate_pocket_size[0])/2
+    -4
+    , margin_top + z_plate_pocket_size[1]/2, 0])
+        circle(bolt_hole_width / 2);
+    translate([horizontal_plate_width - z_plate_pocket_size[0] - z_plate_pocket_margin[3] 
+    - (vertical_plate_borders[1]-z_plate_pocket_size[0])/2
+    +4
+    , margin_top + z_plate_pocket_size[1]/2, 0])
+        circle(bolt_hole_width / 2);;
+}
+
 // z triangle screws holes
 module z_triangle_holes() {
     center = z_triangle_pocket_size[0] / 2;
@@ -80,7 +95,7 @@ module z_triangle_pockets() {
 module z_triangle_holes_bolts() {
     center = z_triangle_pocket_size[0] / 2;
     translate([center, (bolt_mount_spacing - feet_pocket_size[0])/2 , 0])
-        circle(z_triangle_holes_radius);
+        circle(bolt_hole_width / 2);
 }
 
 module bolt_hole() {
@@ -328,6 +343,7 @@ module horizontal_plate() {
         if (bolt_fastening==0) z_triangle_pockets();
         if (bolt_fastening==1) z_triangle_pockets_bolts();
         z_plate_pockets();
+        z_plate_bolt_holes();
         y_motor_pockets();
         y_rod_pockets();
         y_idler_hole();

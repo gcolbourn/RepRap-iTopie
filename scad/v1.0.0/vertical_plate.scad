@@ -54,6 +54,24 @@ module rear_triangle_holes_bolts() {
             };
         }
 
+//horizontal plate bolt holes
+module horizontal_plate_holes_bolts() {        
+    translate([z_plate_pocket_margin[3] + z_plate_pocket_size[0] 
+    + (vertical_plate_borders[3]-z_plate_pocket_size[0])/2
+    -4
+    ,0, 0])
+        rotate([0,0,180]) 
+        translate([-(bolt_mount_spacing + feet_pocket_size[0])/2, 0, 0])
+        bolt_hole_bigbox();  
+        translate([horizontal_plate_width - z_plate_pocket_size[0] - z_plate_pocket_margin[3] 
+    - (vertical_plate_borders[1]-z_plate_pocket_size[0])/2
+    +4
+    ,0, 0])  
+        rotate([0,0,180]) 
+        translate([-(bolt_mount_spacing + feet_pocket_size[0])/2, 0, 0])
+        bolt_hole_bigbox();  
+}
+//    translate([vertical_plate_borders[3] - 15, 30, 0])
 
 
 // z rod holder holes
@@ -103,7 +121,9 @@ module cable_mount_vertical(){
     translate([vertical_plate_borders[3] - 14, vertical_plate_height - vertical_plate_borders[0] - total_feet_height + 15, 0])
     rotate([0, 0, -45])
     _cable_mount_holes();
-    translate([vertical_plate_borders[3] - 15, 10, 0])
+    translate([vertical_plate_borders[3] - 15, (vertical_plate_height - vertical_plate_borders[0] - total_feet_height)/2 + 10, 0])
+    _cable_mount_holes();
+    translate([vertical_plate_borders[3] - 15, 30, 0])
     _cable_mount_holes();
 }
 
@@ -140,6 +160,7 @@ module vertical_base_plate() {
                 _logo_2();
             };
  
+            horizontal_plate_holes_bolts();
             cable_mount_vertical();
             
             if (bolt_fastening==0) translate([-(18-2-feet_pocket_size[1])/2 + vertical_plate_borders[3] / 2, 0, 0]) z_triangle_holes();
