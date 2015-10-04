@@ -199,10 +199,12 @@ mega_margin                 = [18, 18];                  // spacing of holes fro
 
 module _mega_holes(){
             circle(mega_mount_holes_radius);  
-            // This hole removed as too close to y endstop mount:
-            // translate([mega_mount_holes_spacing_x1, 0, 0]) circle(mega_mount_holes_radius);  
+            // This hole removed as off the edge:
+            //translate([mega_mount_holes_spacing_x1, 0, 0]) circle(mega_mount_holes_radius);  
             translate([0, mega_mount_holes_spacing_y, 0]) circle(mega_mount_holes_radius);
             translate([mega_mount_holes_spacing_x2, mega_mount_holes_spacing_y, 0]) circle(mega_mount_holes_radius);  
+            //extra hole to give option to mount on 2 holes nearer to LCD so wires don't stretch
+            translate([0, -mega_mount_holes_spacing_y, 0]) circle(mega_mount_holes_radius);
 }
 
 psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU mount holes (x)
