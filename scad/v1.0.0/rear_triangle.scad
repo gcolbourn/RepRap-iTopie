@@ -168,11 +168,17 @@ module rear_triangles() {
                     translate([1 * _triangle_width / 4 - 25, _triangle_height / 3-7, 0])
             _mega_holes();
             LCD_cable_through_hole_triangle();
+            translate([1 * _triangle_width / 2 - 10 - spooler_mount_holes_radius, _triangle_height / 8 - 10, 0])
+                text("L", size=8);
             }
             };
         translate([2*sheet_thickness/3 + vertical_plate_inner_width + vertical_plate_borders[3] - feet_pocket_size[1] - triangle_margin[3], _triangle_height + 40, 0])
             rotate([0, 0,180])
+                        difference(){
                 rear_triangle();
+                translate([1 * _triangle_width / 2 - 10 - spooler_mount_holes_radius, _triangle_height / 8 - 10, 0])
+                text("R", size=8);
+            };
     }
 };
 rear_triangles();

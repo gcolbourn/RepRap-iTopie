@@ -313,12 +313,41 @@ module psu_mount_horizontal(){
     _square_mount_holes(psu_mount_holes_spacing_x , psu_mount_holes_spacing_y, psu_mount_holes_radius);
 }
 
+// PSU socket mount
+module psu_socket_mount_horizontal(){
+    translate([horizontal_plate_width - psu_socket_mount_hole_x_spacing - 10, horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0] - psu_mount_holes_spacing_y - psu_margin[1], 0])
+    _square_mount_holes(psu_socket_mount_hole_x_spacing , psu_mount_holes_spacing_y, psu_mount_holes_radius);
+}
+
 // cable mount holes
 module cable_mount_horizontal(){
     translate([10, horizontal_plate_height - z_plate_pocket_margin[0] + 10, 0])
     rotate([0, 0, 90])
     _cable_mount_holes();
-}
+    translate([15, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1], 0])
+    _cable_mount_holes();
+    translate([15, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1]+ psu_mount_holes_spacing_y, 0])
+    _cable_mount_holes();
+    translate([20, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1]+ psu_mount_holes_spacing_y + 30, 0])
+    rotate([0, 0, -45]) _cable_mount_holes();
+    translate([50, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1]+ psu_mount_holes_spacing_y + 30, 0])
+    rotate([0, 0, -45]) _cable_mount_holes();
+    translate([horizontal_plate_width - horizontal_plate_borders[3] + 15, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1]+ psu_mount_holes_spacing_y + 30, 0])
+    _cable_mount_holes();
+    translate([horizontal_plate_width - horizontal_plate_borders[3] +15, horizontal_plate_height -  z_plate_pocket_margin[0] + 35, 0])
+    _cable_mount_holes();
+    translate([horizontal_plate_width - horizontal_plate_borders[3] + 15, feet_pocket_margin[2] + feet_pocket_size[1] + psu_margin[1] + 10, 0])
+        rotate([0, 0, -45])
+    _cable_mount_holes();
+    translate([50, horizontal_plate_height -  z_plate_pocket_margin[0] + 35, 0])
+    _cable_mount_holes();
+    translate([horizontal_plate_width - rpi_margin[0] - rpi_mount_holes_spacing_x -33,horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0] - rpi_margin[1] - 10, 0])
+    rotate([0, 0, 90]) _cable_mount_holes();
+    translate([horizontal_plate_width - rpi_margin[0] - rpi_mount_holes_spacing_x -33 - 115,horizontal_plate_height - feet_pocket_size[1] - feet_pocket_margin[0] - rpi_margin[1] - 10, 0])
+    rotate([0, 0, 90]) _cable_mount_holes();
+};
+
+
 
 // LCD cable through hole
 module LCD_cable_through_hole(){
@@ -353,8 +382,11 @@ module horizontal_plate() {
         mega_mount_horizontal();
         rpi_mount_horizontal();
         psu_mount_horizontal();
+        psu_socket_mount_horizontal();
         cable_mount_horizontal();
         LCD_cable_through_hole();
+        translate([horizontal_plate_width-37,30,0]) text("top", size=8);
+        //translate([horizontal_plate_width-43,30,0]) text("front", size=8);
     }
         if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();         
         if (bolt_fastening==1) translate([0, -feet_height - sheet_thickness - 20, 0]) feet_bolts();

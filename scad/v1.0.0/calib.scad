@@ -20,18 +20,18 @@ use     <feet.scad>
 translate([0,40]){
 difference(){
 square([75,30]);
-translate([20,10]) circle(m3_screw_radius);
-translate([29,10]) circle(m4_screw_radius);
-translate([40,10]) circle(z_rod_pocket_radius);
-translate([52,10]) circle(spooler_mount_holes_radius);
-translate([-12,8]) feet_pockets_bolts();
+translate([20,10]) {circle(m3_screw_radius); translate([-2,-8]) text("M3", size=2.5);};
+translate([29,10]) {circle(m4_screw_radius); translate([-2,-8]) text("M4", size=2.5);};
+translate([40,10]) {circle(z_rod_pocket_radius); translate([-4,-8]) text("M8_z", size=2.5);};
+translate([52,10]) {circle(spooler_mount_holes_radius); translate([-4,-8]) text("M8_spool", size=2.5);};
+translate([-12,8]) {feet_pockets_bolts(); translate([35,18]) text("frame fastening (M3)", size=2.5);};
 //translate([25,19]) square(feet_pocket_size);
     };
 };
     
 difference(){
     square([75,30 - sheet_thickness]);
-    translate([8, 30 - sheet_thickness]) bolt_hole_bigbox();
+    translate([8, 30 - sheet_thickness]) {bolt_hole_bigbox(); translate([15,-20]) text("frame fastening (M3)", size=2.5);};
 };
 translate([8, 30 - sheet_thickness])
 bolt_pegs();
