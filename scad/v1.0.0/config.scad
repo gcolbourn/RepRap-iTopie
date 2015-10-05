@@ -210,7 +210,8 @@ module _mega_holes(){
 psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU mount holes (x)
 psu_mount_holes_spacing_y  = 95;                         // spacing between PSU mount holes (y)
 psu_mount_holes_radius     = m3_screw_radius;            // radies of PSU mount holes
-psu_margin                 = [60, 12];                   // spacing of holes from edge of PSU [x, y]
+psu_margin                 = [60, 17];                   // spacing of holes from edge of PSU [x, y]
+psu_socket_mount_hole_x_spacing = 30;                    // horizontal spacing of holes for PSU socket mount
 
 psu_width                  = 114;                        // width of PSU
 psu_height                 = 49;                         // height of PSU
