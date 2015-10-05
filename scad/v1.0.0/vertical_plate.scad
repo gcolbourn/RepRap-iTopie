@@ -82,10 +82,16 @@ module z_rod_holder_holes() {
 }
 
 // logos and LCD mount holes
-module _logo_1(){
+module _logo_1a(){
                 translate([0, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
                 scale([0.12,0.12,0])
-                import(dxf_logo_1);
+                import(dxf_logo_1a);
+}
+
+module _logo_1b(){
+                translate([0, vertical_plate_height - (vertical_plate_borders[0] / 2) - total_feet_height, 0])
+                scale([0.12,0.12,0])
+                import(dxf_logo_1b);
 }
 
 module _logo_2(){
@@ -141,7 +147,8 @@ module vertical_base_plate() {
             // Logos
             if (nlogos == 1) {
             translate([1 * vertical_plate_width / 3,0,0]) 
-                _logo_1();
+               { _logo_1a();
+                _logo_1b();};
             translate([2 * vertical_plate_width / 3,0,0]) 
                 _lcd();                
             };
@@ -153,7 +160,8 @@ module vertical_base_plate() {
             };
             if (nlogos == 3) {
             translate([1 * vertical_plate_width / 4,0,0]) 
-                _logo_1();
+               { _logo_1a();
+                _logo_1b();};
             translate([1 * vertical_plate_width / 2,0,0]) 
                 _lcd();    
             translate([3 * vertical_plate_width / 4,0,0]) 
