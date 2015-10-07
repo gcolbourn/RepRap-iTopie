@@ -20,7 +20,7 @@ bolt_fastening                 = 1;                       // fasten with bolts [
 // ---------------------------------------------------------------- //
 // sheet thickness (raw material)
 //sheet_thickness                = 18;                    // raw sheet thickness [MDF]
-sheet_thickness                = 5;                    // raw sheet thickness (taking into account error)
+sheet_thickness                = 18;                    // raw sheet thickness (taking into account error)
 //sheet_thickness                = 6.25;                    // raw sheet thickness (taking into account error for waterjet aluminium)
 
 
@@ -196,7 +196,7 @@ mega_mount_holes_spacing_x1  = 75;                      // spacing between Mega 
 mega_mount_holes_spacing_x2  = 82.5;                    // spacing between Mega 2560 mount holes (x2)
 mega_mount_holes_spacing_y   = 48.5;                    // spacing between Mega 2560 mount holes (horizontal)
 mega_mount_holes_radius      = m3_screw_radius;         // radius of Mega 2560 mount holes
-mega_margin                 = [18, 18];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way)
+mega_margin                 = [12, 12];                  // spacing of holes from edge of RAMPS [x, y] (x should be 30, but not enough space for 3 holes that way); in fact, not enough space for 3 holes even with x=12.
 
 module _mega_holes(){
             circle(mega_mount_holes_radius);  
@@ -212,7 +212,7 @@ psu_mount_holes_spacing_x  = 177.5;                      // spacing between PSU 
 psu_mount_holes_spacing_y  = 95;                         // spacing between PSU mount holes (y)
 psu_mount_holes_radius     = m3_screw_radius;            // radies of PSU mount holes
 psu_margin                 = [60, 17];                   // spacing of holes from edge of PSU [x, y]
-psu_socket_mount_hole_x_spacing = 30;                    // horizontal spacing of holes for PSU socket mount
+psu_socket_mount_hole_x_spacing = 35;                    // horizontal spacing of holes for PSU socket mount
 
 psu_width                  = 114;                        // width of PSU
 psu_height                 = 49;                         // height of PSU
@@ -267,7 +267,7 @@ y_lm8_holder_vspacing       = undef;                    // lm8uu holder vertical
 // bolt fastening option ------------------------------------------ //
 // ---------------------------------------------------------------- //
 
-bolt_length_bigbox          = 16; //M3x18 for 5mm sheet thickness
+bolt_length_bigbox          = 11+sheet_thickness; //BigBox use M3x18 for 5mm sheet thickness, but can use M3x16
 bolt_hole_depth_bigbox      = bolt_length_bigbox - sheet_thickness; //M3x18 for 5mm sheet thickness
 bolt_hole_width_bigbox      = 2 * m3_screw_radius + 0.2;
 bolt_nut_hole_width_bigbox  = 11;

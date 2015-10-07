@@ -385,7 +385,7 @@ module horizontal_plate() {
         psu_socket_mount_horizontal();
         cable_mount_horizontal();
         LCD_cable_through_hole();
-        translate([horizontal_plate_width-37,30,0]) text("top", size=8);
+        translate([horizontal_plate_width-37,25+sheet_thickness,0]) text("top", size=8);
         //translate([horizontal_plate_width-43,30,0]) text("front", size=8);
     }
         if (bolt_fastening==0) translate([0, -feet_height - sheet_thickness - 20, 0]) feet();         
